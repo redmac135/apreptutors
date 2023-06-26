@@ -50,7 +50,7 @@ class Timeslot(models.Model):
     ]
 
     is_available = models.BooleanField()
-    weekday = models.CharField(max_length=2)
+    weekday = models.CharField(max_length=3)
     time = models.TimeField()
     instructor = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
