@@ -3,14 +3,14 @@
 	let state: number = 0;
 
 	function cycleText() {
-		state = (state + 1) % 2;
+		state = (state + 1) % 3;
 	}
 
 	function sloganLoop() {
-		setTimeout(function() {
+		setTimeout(function () {
 			cycleText();
 			sloganLoop();
-		}, 2000)
+		}, 2000);
 	}
 
 	sloganLoop();
@@ -19,9 +19,19 @@
 <div class="section slogan-container">
 	<h1 class="slogan">
 		{#if state === 0}
-			<span class="rolling-text" id="txt2" in:fly={{ duration: 200, y: -100 }} out:fly={{ duration: 200, y: 100 }}>By</span>
+			<span
+				class="rolling-text"
+				id="txt2"
+				in:fly={{ duration: 200, y: -100 }}
+				out:fly={{ duration: 200, y: 100 }}>By</span
+			>
 		{:else if state === 1}
-			<span class="rolling-text" id="txt1" in:fly={{ duration: 200, y: -100 }} out:fly={{ duration: 200, y: 100 }}>For</span>
+			<span
+				class="rolling-text"
+				id="txt1"
+				in:fly={{ duration: 200, y: -100 }}
+				out:fly={{ duration: 200, y: 100 }}>For</span
+			>
 		{/if}
 		<span>&nbsp;IB students</span>
 	</h1>
