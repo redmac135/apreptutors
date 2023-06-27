@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { linear } from 'svelte/easing';
 	import { fly } from 'svelte/transition';
 	let state: number = 0;
 
