@@ -18,7 +18,7 @@
 		<p>SL SUBJECT, SL SUBJECT, SL SUBJECT, SL SUBJECT, SL SUBJECT</p>
 	</div>
 
-	<div class="section">
+	<div class="section" id="pricing">
 		<h1 class="title-text">Pricing</h1>
 		<div class="packages">
 			<div class="pricing-package">

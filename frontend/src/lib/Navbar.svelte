@@ -7,9 +7,9 @@
 		<li><a class="logo" href="/#">aPrep Tutors</a></li>
 	</ul>
 	<ul class="nav-right">
-        <li><a href="">About us</a></li>
-        <li><a href="">Become a Tutor</a></li>
-        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/#aboutus">About us</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+		<li><a href="">Become a Tutor</a></li>
 		<div class="divider-vertical" />
 		<li><a href="/login">Log In</a></li>
 		<!-- why does the chinese unicode mess up vert spacing :weary: -->

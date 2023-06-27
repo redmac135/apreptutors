@@ -1,4 +1,4 @@
-<div class="section">
+<div class="section" id="aboutus">
 	<div class="container">
 		<div class="left">
 			<h1 class="title"><span>For IB students,</span><span>by IB students</span></h1>
