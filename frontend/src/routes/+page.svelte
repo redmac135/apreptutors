@@ -1,6 +1,6 @@
 <script>
 	import AboutComponent from '../lib/AboutComponent.svelte';
-	import BackgroundSection from './BackgroundSection.svelte';
+	import BackgroundSection from '../lib/BackgroundSection.svelte';
 </script>
 
 <main>
