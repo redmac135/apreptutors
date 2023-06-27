@@ -78,6 +78,7 @@
 
 	.slogan {
 		font-size: 6rem;
+		font-family: 'sans-serif';
 	}
 
 	.flex-container {
@@ -92,6 +93,7 @@
 	.title-text {
 		font: x-large;
 		margin: 1rem 0;
+		font-weight: 400;
 	}
 
 	.description-text {
