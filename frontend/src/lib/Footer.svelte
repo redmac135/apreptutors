@@ -55,6 +55,7 @@
 		margin: 0 auto;
 		display: flex;
         justify-content: space-between;
+		gap: 2rem;
 	}
 
 	.col-1 {
@@ -111,5 +112,26 @@
 
 	.bottom {
 		text-align: center;
+	}
+
+	@media (max-width: 800px) {
+		.top {
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+		}
+
+		.line {
+			width: 100%;
+		}
+
+		.socials {
+			justify-content: space-evenly;
+			width: 100%;
+		}
+
+		svg {
+			height: 2rem;
+		}
 	}
 </style>
