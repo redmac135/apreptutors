@@ -6,7 +6,7 @@
 	<div class="section slogan-container">
 		<h1 class="slogan">SLOGAN</h1>
 		<!-- TODO ANCHORs -->
-		<div><a href="/#">Learn More</a></div>
+		<button><a href="/#">Learn More</a></button>
 	</div>
 
 	<div class="section flex-container">
@@ -118,5 +118,25 @@
 
 	.pricing-package > h2 {
 		text-align: center;
+	}
+
+	button {
+		background-color: var(--dark-blue);
+		border: none;
+		border-radius: 0.3rem;
+		padding: 1rem 2rem;
+		margin: 2rem 0;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+	}
+
+    button:hover {
+        background-color: var(--light-blue);
+    }
+
+	button a {
+		color: var(--white);
+		text-decoration: none;
+		font-size: 1rem;
 	}
 </style>
