@@ -1,6 +1,6 @@
 <div class="section">
 	<div class="container">
-		<h1 class="title">Taught by experienced IB graduates</h1>
+		<h1 class="title">Taught by experienced graduates</h1>
 		<p class="description">
 			Our tutors are good students graduating from the IB program. Each of them have scored 7s in
 			their respective subjects. They will be attending top canadian universities such as:

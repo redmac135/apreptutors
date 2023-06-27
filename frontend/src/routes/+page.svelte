@@ -1,4 +1,6 @@
 <script>
+	import AboutComponent from './AboutComponent.svelte';
+
 	import BackgroundSection from './BackgroundSection.svelte';
 </script>
 
@@ -9,18 +11,7 @@
 		<button><a href="/#">Learn More</a></button>
 	</div>
 
-	<div class="section flex-container">
-		<div class="left-side">
-			<h1 class="title-text">Who we are</h1>
-			<p class="description-text">
-				mission statement text mission statement text mission statement text mission statement text
-				mission statement text mission statement text mission statement text mission statement text
-				mission statement text mission statement text mission statement text mission statement text
-				mission statement text mission statement text mission statement text
-			</p>
-		</div>
-		<div class="right-side">image</div>
-	</div>
+	<AboutComponent />
 
 	<BackgroundSection />
 
@@ -126,13 +117,13 @@
 		border-radius: 0.3rem;
 		padding: 1rem 2rem;
 		margin: 2rem 0;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
+		cursor: pointer;
+		transition: all 0.2s ease-in-out;
 	}
 
-    button:hover {
-        background-color: var(--light-blue);
-    }
+	button:hover {
+		background-color: var(--light-blue);
+	}
 
 	button a {
 		color: var(--white);

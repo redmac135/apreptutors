@@ -23,7 +23,7 @@
 <style>
 	nav {
 		display: flex;
-		background-color: white;
+		background-color: var(--white);
 		justify-content: space-between;
         width: 100%;
 		max-width: 1140px;
