@@ -1,5 +1,5 @@
 <!-- TODO ANCHORs -->
-<a class="wrapper" href="">
+<a class="wrapper" href="/comingsoon">
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		class="icon"
