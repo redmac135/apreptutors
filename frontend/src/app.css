@@ -3,6 +3,7 @@
     --light-blue: #799CF0;
     --dark-blue: #132FBA;
     --beige: #FFF6D2;
+    background-color: var(--white);
 }
 
 * {

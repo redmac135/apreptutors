@@ -3,36 +3,49 @@
 </script>
 
 <nav>
-	<div>LOGO</div>
-	<div class="nav-right">
-		<p>中文</p>
-		<button>login</button>
-	</div>
+	<ul class="nav-left">
+        <li><a href="/#">LOGO</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+    </ul>
+    <ul class="nav-right">
+        <li><a href="/login">Log In</a></li>
+        <!-- why does the chinese unicode mess up vert spacing :weary: -->
+        <li><a href="/zh">chinese</a></li>
+    </ul>
 </nav>
 
+<slot />
+
 <style>
-	nav {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-        padding: 0.5rem;
-		background-color: var(--light-blue);
-	}
-
-    .nav-right {
+    nav {
         display: flex;
-        align-items: center;
-    }
-
-    /* have a bit of space in between chinese and login */
-    .nav-right > * {
-        margin-left: 1rem;
-    }
-
-    .nav-right > button {
         background-color: var(--light-blue);
-        padding: 0.5rem;
-        border-color: var(--dark-blue);
-        border-radius: 0.4rem;
+        justify-content: space-between;
+        max-width: 75%;
+        margin: 0.7rem auto;
+        border-radius: 0.5rem;
+    }
+
+    ul {
+        list-style-type: none;
+        overflow: hidden;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        text-decoration: none;
+        display: block;
+        color: var(--white);
+        padding: 1rem 1.5rem;
+        text-align: center;
+    }
+
+    li a:hover {
+        background-color: var(--dark-blue);
+        border-radius: 0.5rem;
     }
 </style>
