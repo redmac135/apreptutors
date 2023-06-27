@@ -67,6 +67,7 @@
 
 	.logo {
 		font-size: 3rem;
+		font-weight: 600;
 	}
 
 	.divider-vertical {
