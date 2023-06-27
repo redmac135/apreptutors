@@ -1,3 +1,7 @@
+<script>
+	import BackgroundSection from './BackgroundSection.svelte';
+</script>
+
 <main>
 	<div class="section slogan-container">
 		<h1 class="slogan">SLOGAN</h1>
@@ -18,16 +22,7 @@
 		<div class="right-side">image</div>
 	</div>
 
-	<div class="section">
-		<h1 class="title-text">Background</h1>
-		<p class="description-text">
-			background text background text background text background text background text background
-			text background text background text background text background text background text
-			background text background text background text background text background text background
-			text background text background text background text background text background text
-			background text background text background text
-		</p>
-	</div>
+	<BackgroundSection />
 
 	<div class="section">
 		<h1 class="title-text">What we offer</h1>
@@ -70,13 +65,9 @@
 </main>
 
 <style>
-	main {
-		margin: auto;
-		max-width: 75%;
-	}
-
 	.section {
-		margin: 10rem 0;
+		margin: 10rem auto;
+		max-width: 75%;
 	}
 
 	.slogan-container {
