@@ -1,6 +1,5 @@
 <script>
-	import AboutComponent from './AboutComponent.svelte';
-
+	import AboutComponent from '../lib/AboutComponent.svelte';
 	import BackgroundSection from './BackgroundSection.svelte';
 </script>
 
