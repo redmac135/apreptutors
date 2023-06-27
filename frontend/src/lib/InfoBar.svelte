@@ -5,8 +5,8 @@
 		class="icon"
 		x="0px"
 		y="0px"
-		width="24"
-		height="24"
+		width="128"
+		height="128"
 		viewBox="0 0 24 24"
 		fill="currentColor"
 	>
@@ -32,7 +32,9 @@
 	}
 
 	.icon {
-		padding-right: 1rem;
+		margin-right: 0.5rem;
+		height: 1.25rem;
+		width: 1.25rem;
 		color: var(--dark-blue);
 	}
 
