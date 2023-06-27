@@ -1,14 +1,14 @@
 <script lang="ts">
 	import Slogan from '../lib/Slogan.svelte';
 
-	import AboutComponent from '../lib/AboutSection.svelte';
+	import AboutSection from '../lib/AboutSection.svelte';
 	import BackgroundSection from '../lib/BackgroundSection.svelte';
 </script>
 
 <main>
 	<Slogan />
 
-	<AboutComponent />
+	<AboutSection />
 
 	<BackgroundSection />
 
