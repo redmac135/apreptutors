@@ -3,11 +3,7 @@
 	let state: number = 0;
 
 	function cycleText() {
-		if (state === 2) {
-			state = 0;
-		} else {
-			state = state + 1;
-		}
+		state = (state + 1) % 2;
 	}
 
 	function sloganLoop() {
@@ -24,11 +20,10 @@
 	<h1 class="slogan">
 		{#if state === 0}
 			<span class="rolling-text" id="txt2" in:fly={{ duration: 200, y: -100 }} out:fly={{ duration: 200, y: 100 }}>By</span>
-		{/if}
-		{#if state === 1}
+		{:else if state === 1}
 			<span class="rolling-text" id="txt1" in:fly={{ duration: 200, y: -100 }} out:fly={{ duration: 200, y: 100 }}>For</span>
 		{/if}
-		<span>IB students</span>
+		<span>&nbsp;IB students</span>
 	</h1>
 	<!-- TODO ANCHORs -->
 	<button><a href="/#">Learn More</a></button>
@@ -50,7 +45,6 @@
 	.slogan {
 		position: relative;
 		font-size: 6rem;
-		font-family: 'sans-serif';
 	}
 
 	.rolling-text {
