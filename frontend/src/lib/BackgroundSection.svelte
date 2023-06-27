@@ -5,10 +5,15 @@
 			Our tutors are good students graduating from the IB program. Each of them have scored 7s in
 			their respective subjects. They will be attending top canadian universities such as:
 		</p>
-		<div class="uni-container">
-			<img src="images/western.png" alt="western university logo" />
-			<img src="images/waterloo.jpg" alt="waterloo university logo" />
-			<img src="images/mcmaster.png" alt="mcmaster university logo" />
+		<div class="uni-logo-container">
+			<img src="images/western.png" alt="western university logo" class="western-logo" />
+			<img src="images/waterloo.png" alt="waterloo university logo" class="waterloo-logo" />
+			<img src="images/mcmaster.png" alt="mcmaster university logo" class="mcmaster-logo" />
+		</div>
+		<div class="uni-crest-container">
+			<img src="images/westerncrest.png" alt="western university crest" class="western-crest" />
+			<img src="images/waterloocrest.png" alt="waterloo university crest" class="waterloo-crest" />
+			<img src="images/mcmastercrest.png" alt="mcmaster university crest" class="mcmaster-crest" />
 		</div>
 		<!-- TODO update anchor -->
 		<button><a href="/#">Learn more about our tutors</a></button>
@@ -40,19 +45,35 @@
 		font-size: 1.5rem;
 		text-align: center;
 		margin: 1rem 0;
-        width: 60%;
+		width: 60%;
 	}
 
-	.uni-container {
-		width: 100%;
+	.uni-logo-container {
+		display: none;
+	}
+
+	.uni-crest-container img {
+		height: 8rem;
+	}
+
+	.uni-crest-container {
+		width: 30rem;
 		display: flex;
 		justify-content: space-evenly;
-        margin: 2.5rem 0;
 	}
 
-	.uni-container img {
-		height: 10rem;
-		aspect-ratio: 1/1;
+	.western-logo {
+		height: 7rem;
+	}
+
+	.waterloo-logo {
+		height: 8rem;
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+
+	.mcmaster-logo {
+		height: 9rem;
 	}
 
 	button {
@@ -61,17 +82,30 @@
 		border-radius: 0.3rem;
 		padding: 1rem 2rem;
 		margin: 2rem 0;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
+		cursor: pointer;
+		transition: all 0.2s ease-in-out;
 	}
 
-    button:hover {
-        background-color: var(--light-blue);
-    }
+	button:hover {
+		background-color: var(--light-blue);
+	}
 
 	button a {
 		color: var(--white);
 		text-decoration: none;
 		font-size: 1rem;
+	}
+
+	@media (min-width: 1300px) {
+		.uni-logo-container {
+			width: 100%;
+			display: flex;
+			justify-content: space-evenly;
+			margin: 2.5rem 0;
+		}
+
+		.uni-crest-container {
+			display: none;
+		}
 	}
 </style>
