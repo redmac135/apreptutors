@@ -1,9 +1,11 @@
 <div class="container">
-	<h1 class="title">Our mission</h1>
-	<p class="description">
-		Preparing future IB students to excel in examinations with curated lessons, networking with
-		recent alumni, and a vast databank of resources specifically for IB students.
-	</p>
+	<div class="text-container">
+		<h1 class="title">Our mission</h1>
+		<p class="description">
+			Preparing future IB students to excel in examinations with curated lessons, networking with
+			recent alumni, and a vast databank of resources specifically for IB students.
+		</p>
+	</div>
 	<div class="info-container">
 		<div class="info">
 			<h2>IB</h2>
@@ -28,6 +30,13 @@
 		padding: 6rem;
 		display: flex;
 		flex-direction: column;
+		align-items: center;
+	}
+
+	.text-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		align-items: center;
 	}
 
@@ -61,5 +70,31 @@
 
 	.info h2 {
 		font-size: 4rem;
+	}
+
+	@media (min-width: 1000px) {
+		.container {
+			flex-direction: row;
+		}
+
+		.info-container {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			width: 8rem;
+			margin: 0;
+		}
+
+		.info {
+			width: 7rem;
+		}
+
+		.right-sep {
+			border-right: 0;
+			border-bottom: 2px solid var(--dark-blue);
+			margin-top: 0.5rem;
+			margin-bottom: 0.5rem;
+			width: 100%;
+		}
 	}
 </style>
