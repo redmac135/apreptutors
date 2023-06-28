@@ -1,13 +1,13 @@
-<script>
+<script lang="ts">
 	import { getContext } from 'svelte';
     import { detailkeys } from './DetailsContainer.svelte';
 	
-	export let summary;
+	export let summary: string;
 
-	const activeFaq = getContext(detailkeys);
+	const activeDetail = getContext(detailkeys);
 </script>
 
-<details open={$activeFaq === summary} on:toggle={({target}) => {$activeFaq = target.open ? summary : $activeFaq}}>
+<details open={$activeDetail === summary} on:toggle={({target}) => {$activeDetail = target.open ? summary : $activeDetail}}>
   <summary>{summary}</summary>
 	<slot />
 </details>
