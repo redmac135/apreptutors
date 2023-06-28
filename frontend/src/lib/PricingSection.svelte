@@ -1,26 +1,45 @@
-<section id="pricing">
-	<h1 class="title-text">Pricing</h1>
+<div class="container">
+	<h1>Pricing</h1>
 	<div class="packages">
-		<img src="images/privatepricing.png" alt="Prices for Private Pricing">
-		<img src="images/grouppricing.png" alt="Prices for Group Pricing">
+		<img src="images/privatepricing.png" alt="Prices for private lessons" />
+		<img src="images/grouppricing.png" alt="Prices for group lessons" />
 	</div>
-</section>
+</div>
 
 <style>
-	section {
-		margin: 10rem auto;
-		max-width: 75%;
-		overflow-x: scroll;
+	.container {
+		padding: 4rem 0;
+		background-color: var(--beige);
 	}
 
-	.title-text {
-		font: x-large;
-		margin: 1rem 0;
-		font-weight: 400;
+	h1 {
+		text-align: center;
+		font-size: 3rem;
+		margin: 2rem 0;
 	}
 
 	.packages {
 		display: flex;
 		justify-content: space-between;
+		flex-wrap: wrap;
+		max-width: 90%;
+		margin: auto;
+	}
+
+	img {
+		width: 100%;
+		height: auto;
+		padding: 1rem;
+	}
+
+	@media (min-width: 800px) {
+		.packages {
+			max-width: 60%;
+		}
+
+		img {
+			width: 50%;
+		}
+
 	}
 </style>
