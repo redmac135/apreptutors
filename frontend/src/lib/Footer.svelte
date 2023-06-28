@@ -6,7 +6,7 @@
 	<div class="top">
 		<div class="col-1">
 			<h1 class="logo">aPrep Tutors</h1>
-			<p class="slogan">For ib students by ib students</p>
+			<p class="slogan">For ib students<br>By ib students</p>
 			<div class="socials">
 				<a href="mailto:info@apreptutors.com" target="_blank" rel="noopener noreferrer"
 					><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"
@@ -59,7 +59,8 @@
 	}
 
 	.top {
-		max-width: 60%;
+		/* max-width: 60%; */
+		max-width: 90%;
 		margin: 0 auto;
 		display: flex;
 		justify-content: space-between;
@@ -74,11 +75,13 @@
 	}
 
 	.logo {
-		font-size: 3.5rem;
+		font-size: 2rem;
+		font-weight: 600;
 	}
 
 	.slogan {
 		font-size: 1.5rem;
+		text-align: center;
 	}
 
 	.socials {
@@ -122,6 +125,17 @@
 		text-align: center;
 	}
 
+	@media (min-width: 700px) {
+		.logo {
+			font-size: 3.5rem;
+		}
+
+		.top {
+			width: 60%;
+		}
+	}
+
+	/* TODO: convert this to min-width measurements */
 	@media (max-width: 800px) {
 		.top {
 			flex-direction: column;

@@ -26,7 +26,7 @@
 		color: black;
 		margin-bottom: 0.5rem;
 		cursor: pointer;
-		width: 25rem;
+		width: 20rem;
 		padding: 1rem;
 		border: 2px solid var(--dark-blue);
 		border-radius: 0.5rem;
@@ -44,5 +44,11 @@
 		border-top: 2px solid var(--dark-blue);
 		margin-top: 1rem;
 		padding-top: 1rem;
+	}
+
+	@media (min-width: 500px) {
+		details {
+			width: 20rem;
+		}
 	}
 </style>

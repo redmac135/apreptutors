@@ -31,7 +31,7 @@
 	.container {
 		width: 100%;
 		margin: auto;
-		padding: 4rem;
+		padding: 2rem;
 		/* center all elements under this */
 		display: flex;
 		flex-direction: column;
@@ -103,6 +103,10 @@
 	@media (min-width: 600px) {
 		.uni-crest-container img {
 			height: 8rem;
+		}
+
+		.container {
+			padding: 4rem;
 		}
 	}
 
