@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="pricing">
 	<h1>Pricing</h1>
 	<div class="packages">
 		<img src="images/privatepricing.png" alt="Prices for private lessons" />
