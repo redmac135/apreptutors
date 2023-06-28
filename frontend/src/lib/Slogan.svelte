@@ -3,52 +3,60 @@
 	let state: number = 0;
 
 	function cycleText() {
-		state = (state + 1) % 3;
+		state = (state + 1) % 2;
 	}
 
 	function sloganLoop() {
 		setTimeout(function () {
 			cycleText();
-			// sloganLoop();
+			sloganLoop();
 		}, 2000);
 	}
 
 	sloganLoop();
 </script>
 
-<div class="section slogan-container">
-	<h1 class="slogan">
-		{#if state === 0}
-			<span
-				class="rolling-text"
-				id="txt2"
-				in:fly={{ duration: 200, y: -100 }}
-				out:fly={{ duration: 200, y: 100 }}>By</span
-			>
-		{:else if state === 1}
-			<span
-				class="rolling-text"
-				id="txt1"
-				in:fly={{ duration: 200, y: -100 }}
-				out:fly={{ duration: 200, y: 100 }}>For</span
-			>
-		{/if}
-		<span>&nbsp;IB students</span>
-	</h1>
-	<!-- TODO ANCHORs -->
-	<button><a href="/#">Learn More</a></button>
-</div>
+<section>
+	<div class="section container">
+		<h1 class="slogan">
+			{#if state === 0}
+				<span
+					class="rolling-text"
+					id="txt2"
+					in:fly={{ duration: 200, y: -100 }}
+					out:fly={{ duration: 200, y: 100 }}>By</span
+				>
+			{:else if state === 1}
+				<span
+					class="rolling-text"
+					id="txt1"
+					in:fly={{ duration: 200, y: -100 }}
+					out:fly={{ duration: 200, y: 100 }}>For</span
+				>
+			{/if}
+			<span>&nbsp;IB students</span>
+		</h1>
+		<!-- TODO ANCHORs -->
+		<button><a href="/#">Learn More</a></button>
+	</div>
+</section>
 
 <style>
-	.section {
-		margin: 10rem auto;
-		max-width: 75%;
+	section {
+		background-image: url('images/sloganbackground.jpg');
+		background-position: center;
+		background-size: cover;
+		background-attachment: fixed;
+		height: 70vh;
 	}
 
-	.slogan-container {
+	.container {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		padding-top: 10rem;
+		margin: auto;
+		max-width: 75%;
 	}
 
 	.rolling-text {
@@ -91,7 +99,7 @@
 	}
 
 	@media (min-width: 400px) {
-		.section {
+		.container {
 			overflow-y: hidden;
 		}
 
