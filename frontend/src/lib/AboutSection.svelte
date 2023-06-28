@@ -19,7 +19,7 @@
 			</div>
 			<div class="right-sep" />
 			<div class="info">
-				<h2>97+</h2>
+				<h2>97<span class="weak">+</span></h2>
 				<p>final mark averages</p>
 			</div>
 		</div>
@@ -50,13 +50,13 @@
 	}
 
 	.title {
-		font-size: 3rem;
+		font-size: 2rem;
 		margin-bottom: 1rem;
 	}
 
 	.description {
 		font-size: 1.5rem;
-		width: 75%;
+		width: 20rem;
 		text-align: center;
 	}
 
@@ -64,12 +64,16 @@
 		display: flex;
 		justify-content: space-evenly;
 		margin-top: 3rem;
-		width: 75%;
+		width: 23rem;
 	}
 
 	.info {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
 		text-align: center;
-		width: 20%;
+		height: 100%;
+		width: 7rem;
 		margin: auto;
 	}
 
@@ -78,7 +82,32 @@
 	}
 
 	.info h2 {
-		font-size: 4rem;
+		font-size: 3rem;
+	}
+
+	.info h2 span.weak {
+		font-size: 2rem;
+		vertical-align: top;
+	}
+
+	@media (min-width: 450px) {
+		.title {
+			font-size: 3rem;
+		}
+
+		.description {
+			width: 25rem;
+		}
+	}
+
+	@media (min-width: 700px) {
+		.info h2 {
+			font-size: 4rem;
+		}
+
+		.description {
+			width: 75%;
+		}
 	}
 
 	@media (min-width: 1000px) {
