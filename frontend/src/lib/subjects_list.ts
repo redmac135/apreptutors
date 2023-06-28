@@ -1,6 +1,6 @@
 export const HL_SUBJECTS = [
     {
-        title: 'MATH HL',
+        title: 'MATH AA HL',
         desc: 'Students studying HL Mathematics investigate a broad range of topics, including differential calculus, probability, trigonometry, complex arithmetic, functions, and linear algebra. Includes an additional problem set similar to mathematics competitions during exams, with a focus on analytical and technical skills. Useful for students planning to study in STEM-related fields in university.',
     },
     {
@@ -27,7 +27,7 @@ export const HL_SUBJECTS = [
 
 export const SL_SUBJECTS = [
     {
-        title: 'MATH SL',
+        title: 'MATH AA SL',
         desc: 'Students studying SL Mathematics cover a shallow but broad field of mathematical topics including calculus, trigonometry, probability, financial math and functions. Focuses on developing problem-solving techniques in students without rigorous experience in mathematics, including calculator techniques in solving problems. Students who expect to major in business, humanities, or non-STEM fields typically take SL mathematics.',
     },
     {
