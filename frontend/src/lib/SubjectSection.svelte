@@ -4,7 +4,7 @@
 </script>
 
 <div class="container">
-	<h1>Diversity in subjects</h1>
+	<h1>Diversity in Subjects</h1>
 	<p>
 		In the IB Programme, there are HL and SL subjects, which stands for Higher Level and Standard
 		Level. HL subjects require a more extensive and in-depth study compared to SL subjects. While

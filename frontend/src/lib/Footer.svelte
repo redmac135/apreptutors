@@ -6,7 +6,7 @@
 	<div class="top">
 		<div class="col-1">
 			<h1 class="logo">aPrep Tutors</h1>
-			<p class="slogan">for ib students by ib students</p>
+			<p class="slogan">For ib students by ib students</p>
 			<div class="socials">
 				<a href="mailto:info@apreptutors.com" target="_blank" rel="noopener noreferrer"
 					><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"
