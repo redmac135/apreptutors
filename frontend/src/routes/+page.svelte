@@ -3,6 +3,8 @@
 
 	import AboutComponent from '../lib/AboutSection.svelte';
 	import BackgroundSection from '../lib/BackgroundSection.svelte';
+	import Subjects from '$lib/Subjects.svelte';
+	import { HL_SUBJECTS, SL_SUBJECTS } from '$lib/subjects_list';
 </script>
 
 <main>
@@ -12,11 +14,8 @@
 
 	<BackgroundSection />
 
-	<div class="section">
-		<h1 class="title-text">What we offer</h1>
-		<p>HL SUBJECT, HL SUBJECT, HL SUBJECT, HL SUBJECT, HL SUBJECT</p>
-		<p>SL SUBJECT, SL SUBJECT, SL SUBJECT, SL SUBJECT, SL SUBJECT</p>
-	</div>
+	<Subjects slides={HL_SUBJECTS} />
+	<Subjects slides={SL_SUBJECTS} />
 
 	<div class="section" id="pricing">
 		<h1 class="title-text">Pricing</h1>
