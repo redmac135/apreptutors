@@ -65,10 +65,10 @@
 		font-size: 3rem;
 		color: black;
 		letter-spacing: 5px;
-		font-weight: 400;
+		font-weight: 600;
 	}
 	h2 {
-		font-weight: 200;
+		font-weight: 400;
 	}
 	.countdown {
 		display: flex;
