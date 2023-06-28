@@ -7,13 +7,6 @@
 		desc: string;
 	};
 	export let slides: Array<Slide>;
-
-	let slide_idx = 0;
-	function advance(n: number) {
-		slide_idx += n;
-		if (slide_idx < 0) slide_idx = slides.length - 1;
-		else if (slide_idx >= slides.length) slide_idx = 0;
-	}
 </script>
 
 <div class="container">
