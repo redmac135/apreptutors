@@ -50,6 +50,10 @@
 		flex: 0.75;
 		row-gap: 7rem;
 		height: 80vh;
+		background-image: url('images/sloganbackground.jpg');
+		background-position: center;
+		background-size: cover;
+		background-attachment: fixed;
 	}
 	.title {
 		display: flex;
@@ -58,7 +62,7 @@
 		align-items: center;
 	}
 	h1 {
-		font-size: 4rem;
+		font-size: 3rem;
 		color: black;
 		letter-spacing: 5px;
 		font-weight: 400;
@@ -74,6 +78,7 @@
 
 	@media (min-width: 768px) {
 		h1 {
+			font-size: 4rem;
 			letter-spacing: 9px;
 		}
 		.countdown {
