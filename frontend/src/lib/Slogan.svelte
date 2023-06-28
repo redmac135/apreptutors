@@ -3,74 +3,74 @@
 	let state: number = 0;
 
 	function cycleText() {
-		if (state === 2) {
-			state = 0;
-		} else {
-			state = state + 1;
-		}
+		state = (state + 1) % 2;
 	}
 
 	function sloganLoop() {
-		setTimeout(function() {
+		setTimeout(function () {
 			cycleText();
 			sloganLoop();
-		}, 2000)
+		}, 2000);
 	}
 
 	sloganLoop();
 </script>
 
-<div class="section slogan-container">
-	<h1 class="slogan">
-		{#if state === 0}
-			<span class="rolling-text" id="txt2" in:fly={{ duration: 200, y: -100 }} out:fly={{ duration: 200, y: 100 }}>By</span>
-		{/if}
-		{#if state === 1}
-			<span class="rolling-text" id="txt1" in:fly={{ duration: 200, y: -100 }} out:fly={{ duration: 200, y: 100 }}>For</span>
-		{/if}
-		<span>IB students</span>
-	</h1>
-	<!-- TODO ANCHORs -->
-	<button><a href="/#">Learn More</a></button>
-</div>
+<section>
+	<div class="section container">
+		<h1 class="slogan">
+			{#if state === 0}
+				<span
+					class="rolling-text"
+					id="txt2"
+					in:fly={{ duration: 200, y: -100 }}
+					out:fly={{ duration: 200, y: 100 }}>By</span
+				>
+			{:else if state === 1}
+				<span
+					class="rolling-text"
+					id="txt1"
+					in:fly={{ duration: 200, y: -100 }}
+					out:fly={{ duration: 200, y: 100 }}>For</span
+				>
+			{/if}
+			<span>&nbsp;IB students</span>
+		</h1>
+		<!-- TODO ANCHORs -->
+		<button><a href="/#">Learn More</a></button>
+	</div>
+</section>
 
 <style>
-	.section {
-		margin: 10rem auto;
-		max-width: 75%;
-		overflow: hidden;
+	section {
+		background-image: url('/images/sloganbackground.jpg');
+		background-position: center;
+		background-size: cover;
+		background-attachment: fixed;
+		height: 70vh;
 	}
 
-	.slogan-container {
+	.container {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-	}
-
-	.slogan {
-		position: relative;
-		font-size: 6rem;
-		font-family: 'sans-serif';
+		padding-top: 10rem;
+		margin: auto;
+		max-width: 75%;
 	}
 
 	.rolling-text {
 		font-style: italic;
 		position: absolute;
-		left: 0;
-	}
-
-	.rolling-text#txt1 {
-		transform: translateX(-11rem);
-	}
-
-	.rolling-text#txt2 {
-		transform: translateX(-8.5rem);
+		text-align: center;
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		top: -3rem;
 	}
 
 	.slogan span {
-		font-size: 6rem;
 		font-family: 'sans-serif';
-		padding-left: 8rem;
 	}
 
 	button {
@@ -91,5 +91,53 @@
 		color: var(--white);
 		text-decoration: none;
 		font-size: 1rem;
+	}
+
+	.slogan {
+		position: relative;
+		font-size: 3rem;
+	}
+
+	@media (min-width: 400px) {
+		.container {
+			overflow-y: hidden;
+		}
+
+		.rolling-text {
+			left: 0;
+			top: 0;
+			margin: 0;
+			width: auto;
+		}
+
+		.slogan span {
+			padding-left: 4rem;
+		}
+
+		.rolling-text#txt1 {
+			transform: translateX(-5rem);
+		}
+
+		.rolling-text#txt2 {
+			transform: translateX(-3.75rem);
+		}
+	}
+
+	@media (min-width: 850px) {
+		.slogan {
+			font-size: 6rem;
+		}
+
+		.slogan span {
+			padding-left: 8rem;
+		}
+
+		.rolling-text#txt1 {
+			transform: translateX(-10rem);
+		}
+
+		.rolling-text#txt2 {
+			transform: translateX(-7.5rem);
+		}
 	}
 </style>

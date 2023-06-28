@@ -8,12 +8,12 @@
 
 @font-face {
     font-family: workSans;
-    src: url('fonts/WorkSans-VariableFont_wght.ttf');
+    src: url('/fonts/WorkSans-VariableFont_wght.ttf');
 }
 
 @font-face {
     font-family: workSans;
-    src: url('fonts/WorkSans-Italic-VariableFont_wght.ttf');
+    src: url('/fonts/WorkSans-Italic-VariableFont_wght.ttf');
     font-style: italic;
 }
 

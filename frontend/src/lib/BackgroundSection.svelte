@@ -1,9 +1,12 @@
 <div class="section">
 	<div class="container">
-		<h1 class="title">Taught by experienced graduates</h1>
+		<h1 class="title">Taught by Experienced Graduates</h1>
 		<p class="description">
-			Our tutors are good students graduating from the IB program. Each of them have scored 7s in
-			their respective subjects. They will be attending top canadian universities such as:
+			Our tutors are recent graduates of the IB program, socring top marks in their respective
+			subjects. They will be attending top competitive programs in Canada, such as Waterloo CS,
+			McMaster Health Sciences and Western Ivey. With their fresh academic insight and first-hand
+			experience, they will mentor young students and give them the resources to succeed in high
+			school.
 		</p>
 		<div class="uni-logo-container">
 			<img src="images/western.png" alt="western university logo" class="western-logo" />
@@ -26,7 +29,7 @@
 	}
 
 	.container {
-		width: 75%;
+		width: 100%;
 		margin: auto;
 		padding: 4rem;
 		/* center all elements under this */
@@ -45,7 +48,7 @@
 		font-size: 1.5rem;
 		text-align: center;
 		margin: 1rem 0;
-		width: 60%;
+		width: 100%;
 	}
 
 	.uni-logo-container {
@@ -53,13 +56,14 @@
 	}
 
 	.uni-crest-container img {
-		height: 8rem;
+		height: 6rem;
 	}
 
 	.uni-crest-container {
 		width: 30rem;
 		display: flex;
 		justify-content: space-evenly;
+		margin: 2.5rem 0;
 	}
 
 	.western-logo {
@@ -96,7 +100,27 @@
 		font-size: 1rem;
 	}
 
+	@media (min-width: 600px) {
+		.uni-crest-container img {
+			height: 8rem;
+		}
+	}
+
+	@media (min-width: 900px) {
+		.container {
+			width: 100%;
+		}
+
+		.description {
+			margin: 0.5rem 0;
+		}
+	}
+
 	@media (min-width: 1300px) {
+		.description {
+			width: 80%;
+		}
+
 		.uni-logo-container {
 			width: 100%;
 			display: flex;
