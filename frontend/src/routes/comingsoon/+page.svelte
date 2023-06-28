@@ -50,7 +50,7 @@
 		flex: 0.75;
 		row-gap: 7rem;
 		height: 80vh;
-		background-image: url('images/sloganbackground.jpg');
+		background-image: url('/images/sloganbackground.jpg');
 		background-position: center;
 		background-size: cover;
 		background-attachment: fixed;
