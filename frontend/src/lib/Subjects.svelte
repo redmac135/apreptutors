@@ -12,11 +12,7 @@
 <div class="container">
 	<DetailsContainer>
 		{#each slides as slide}
-			<div class="summary">
-				<Details summary={slide.title}>
-					<p>{slide.desc}</p>
-				</Details>
-			</div>
+			<Details summary={slide.title} content={slide.desc} />
 		{/each}
 	</DetailsContainer>
 </div>
@@ -28,19 +24,5 @@
 		align-items: center;
 		justify-content: center;
 		overflow-x: hidden;
-		margin-left: 1.5rem;
-		margin-right: 1.5rem;
-	}
-
-	.summary {
-		background-color: #eee;
-		color: #444;
-		cursor: pointer;
-		padding: 18px;
-		width: 25rem;
-		border: none;
-		text-align: left;
-		outline: none;
-		font-size: 15px;
 	}
 </style>
