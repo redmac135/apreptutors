@@ -5,7 +5,13 @@
 
 <div class="container">
 	<h1>Diversity in subjects</h1>
-	<p>some text explaining the difference between hl and sl</p>
+	<p>
+		In the IB Programme, there are HL and SL subjects, which stands for Higher Level and Standard
+		Level. HL subjects require a more extensive and in-depth study compared to SL subjects. While
+		both HL and SL subjects are rigorous and challenging, HL subjects provide students with a deeper
+		understanding and preparation for higher education, while SL subjects offer a solid foundation
+		in the subject area.
+	</p>
 	<div class="subject-wrapper">
 		<div class="subject-list">
 			<h2>Higher level</h2>
@@ -58,6 +64,11 @@
 	@media (min-width: 800px) {
 		.subject-wrapper {
 			margin-top: 4rem;
+		}
+
+		p {
+			max-width: 75%;
+			margin: 1rem auto;
 		}
 	}
 </style>
