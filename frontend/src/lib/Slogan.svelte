@@ -9,7 +9,7 @@
 	function sloganLoop() {
 		setTimeout(function () {
 			cycleText();
-			sloganLoop();
+			// sloganLoop();
 		}, 2000);
 	}
 
@@ -43,7 +43,6 @@
 	.section {
 		margin: 10rem auto;
 		max-width: 75%;
-		overflow: hidden;
 	}
 
 	.slogan-container {
@@ -52,29 +51,18 @@
 		align-items: center;
 	}
 
-	.slogan {
-		position: relative;
-		font-size: 6rem;
-	}
-
 	.rolling-text {
 		font-style: italic;
 		position: absolute;
-		left: 0;
-	}
-
-	.rolling-text#txt1 {
-		transform: translateX(-11rem);
-	}
-
-	.rolling-text#txt2 {
-		transform: translateX(-8.5rem);
+		text-align: center;
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		top: -3rem;
 	}
 
 	.slogan span {
-		font-size: 6rem;
 		font-family: 'sans-serif';
-		padding-left: 8rem;
 	}
 
 	button {
@@ -95,5 +83,53 @@
 		color: var(--white);
 		text-decoration: none;
 		font-size: 1rem;
+	}
+
+	.slogan {
+		position: relative;
+		font-size: 3rem;
+	}
+
+	@media (min-width: 400px) {
+		.section {
+			overflow-y: hidden;
+		}
+
+		.rolling-text {
+			left: 0;
+			top: 0;
+			margin: 0;
+			width: auto;
+		}
+
+		.slogan span {
+			padding-left: 4rem;
+		}
+
+		.rolling-text#txt1 {
+			transform: translateX(-5rem);
+		}
+
+		.rolling-text#txt2 {
+			transform: translateX(-3.75rem);
+		}
+	}
+
+	@media (min-width: 850px) {
+		.slogan {
+			font-size: 6rem;
+		}
+
+		.slogan span {
+			padding-left: 8rem;
+		}
+
+		.rolling-text#txt1 {
+			transform: translateX(-10.5rem);
+		}
+
+		.rolling-text#txt2 {
+			transform: translateX(-8rem);
+		}
 	}
 </style>
