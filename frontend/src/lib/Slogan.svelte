@@ -133,11 +133,11 @@
 		}
 
 		.rolling-text#txt1 {
-			transform: translateX(-10.5rem);
+			transform: translateX(-10rem);
 		}
 
 		.rolling-text#txt2 {
-			transform: translateX(-8rem);
+			transform: translateX(-7.5rem);
 		}
 	}
 </style>
