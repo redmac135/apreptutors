@@ -7,6 +7,10 @@
 	import '../app.css';
 </script>
 
+<svelte:head>
+	<title>aPrep Tutors</title>
+</svelte:head>
+
 <Navbar />
 <InfoBar />
 <slot />
