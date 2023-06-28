@@ -23,14 +23,4 @@
 		display: flex;
 		justify-content: space-between;
 	}
-
-	.pricing-package {
-		padding: 1rem;
-		border: 1px solid black;
-		margin: 0 0.5rem;
-	}
-
-	.pricing-package > h2 {
-		text-align: center;
-	}
 </style>
