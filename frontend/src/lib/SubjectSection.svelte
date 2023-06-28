@@ -33,7 +33,6 @@
 	p {
 		text-align: center;
 		font-size: 1.5rem;
-		/* margin-top: 1rem; */
 		margin: 1rem;
 		margin-bottom: 0;
 	}
