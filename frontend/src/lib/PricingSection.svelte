@@ -1,33 +1,8 @@
 <section id="pricing">
 	<h1 class="title-text">Pricing</h1>
 	<div class="packages">
-		<div class="pricing-package">
-			<h2>Package 1</h2>
-			<p>
-				pricing text pricing text pricing text pricing text pricing text pricing text pricing text
-				pricing text pricing text pricing text pricing text pricing text pricing text pricing text
-				pricing text pricing text pricing text pricing text pricing text pricing text pricing text
-				pricing text
-			</p>
-		</div>
-		<div class="pricing-package">
-			<h2>Package 2</h2>
-			<p>
-				pricing text pricing text pricing text pricing text pricing text pricing text pricing text
-				pricing text pricing text pricing text pricing text pricing text pricing text pricing text
-				pricing text pricing text pricing text pricing text pricing text pricing text pricing text
-				pricing text
-			</p>
-		</div>
-		<div class="pricing-package">
-			<h2>Package 3</h2>
-			<p>
-				pricing text pricing text pricing text pricing text pricing text pricing text pricing text
-				pricing text pricing text pricing text pricing text pricing text pricing text pricing text
-				pricing text pricing text pricing text pricing text pricing text pricing text pricing text
-				pricing text
-			</p>
-		</div>
+		<img src="images/privatepricing.png" alt="Prices for Private Pricing">
+		<img src="images/grouppricing.png" alt="Prices for Group Pricing">
 	</div>
 </section>
 
