@@ -6,6 +6,7 @@
     const app = get(firebaseApp);
 
     const loginWithGoogle = () => {
+        // @ts-ignore
         const auth = getAuth(app);
         signInWithPopup(auth, new GoogleAuthProvider());
     }
