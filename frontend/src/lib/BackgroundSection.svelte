@@ -2,7 +2,7 @@
 	<div class="container">
 		<h1 class="title">Taught by Experienced Graduates</h1>
 		<p class="description">
-			Our tutors are recent graduates of the IB program, socring top marks in their respective
+			Our tutors are recent graduates of the IB program, scoring top marks in their respective
 			subjects. They will be attending top competitive programs in Canada, such as Waterloo CS,
 			McMaster Health Sciences and Western Ivey. With their fresh academic insight and first-hand
 			experience, they will mentor young students and give them the resources to succeed in high
