@@ -49,6 +49,7 @@
 		text-align: center;
 		margin: 1rem 0;
 		width: 100%;
+		line-height: 1.5;
 	}
 
 	.uni-logo-container {

@@ -58,6 +58,7 @@
 		font-size: 1.5rem;
 		width: 20rem;
 		text-align: center;
+		line-height: 1.5;
 	}
 
 	.info-container {

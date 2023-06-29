@@ -41,6 +41,7 @@
 		font-size: 1.5rem;
 		margin: 1rem;
 		margin-bottom: 0;
+		line-height: 1.5;
 	}
 
 	.subject-wrapper {
