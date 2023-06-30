@@ -16,6 +16,7 @@ class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
         fields = [
+            "pk",
             "name",
             "address",
         ]
@@ -27,6 +28,7 @@ class CanTeachAtSerializer(serializers.ModelSerializer):
     class Meta:
         model = CanTeachAt
         fields = [
+            "pk",
             "instructor",
             "location",
         ]
@@ -39,6 +41,7 @@ class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = [
+            "pk",
             "display_name",
             "email",
             "canteachat_set",
