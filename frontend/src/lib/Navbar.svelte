@@ -17,7 +17,7 @@
 	<ul class="nav-right" class:nav-open={open}>
 		<li class="link"><a href="/#aboutus">About us</a></li>
 		<li class="link"><a href="/#pricing">Pricing</a></li>
-		<li class="link"><a href="/comingsoon">Become a Tutor</a></li>
+		<li class="link"><a href="/become-a-tutor">Become a Tutor</a></li>
 		<div class="divider-vertical" />
 		<li class="link"><a href="/comingsoon">Log In</a></li>
 		<li class="link"><a href="/comingsoon">中文</a></li>
