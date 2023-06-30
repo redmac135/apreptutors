@@ -29,7 +29,7 @@ class FirebaseAuthentication(BaseAuthentication):
 
     def authenticate(self, request):
         """Get the authorization Token, It raise exception when no authorization Token is given"""
-        auth_header = request.META.get("HTTP_AUTHORIZATION")
+        auth_header = request.META.get("Authorization")
         if not auth_header:
             raise exceptions.NoAuthToken("No auth token provided")
         """Decoding the Token It rasie exception when decode failed."""
