@@ -109,7 +109,6 @@
 
 	.button {
 		background-color: var(--dark-blue);
-		border: none;
 		color: white;
 		padding: 0.5rem;
 		text-align: center;
