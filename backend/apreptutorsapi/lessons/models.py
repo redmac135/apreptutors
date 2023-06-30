@@ -80,7 +80,7 @@ class Timeslot(models.Model):
     instructor = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return str(self.time) + " " + self.weekday + " " + str(self.instructor)
+        return str(self.start_time) + " " + self.weekday + " " + str(self.instructor)
 
     @classmethod
     def create_timeslot(
@@ -117,12 +117,14 @@ class Lesson(models.Model):
         if not subject.check_qualified(instructor):
             raise PermissionError("Not Qualified")
 
+
 class Location(models.Model):
     name = models.CharField(max_length=512)
     address = models.CharField(max_length=512)
 
     def __str__(self) -> str:
         return self.name
+
 
 class CanTeachAt(models.Model):
     instructor = models.ForeignKey(Profile, on_delete=models.CASCADE)
