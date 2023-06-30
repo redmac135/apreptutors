@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Qualification, Timeslot, Location, CanTeachAt
+from .models import Qualification, Timeslot, Location, CanTeachAt, Profile
 
 
 class QualificationSerializer(serializers.ModelSerializer):
@@ -22,6 +22,8 @@ class LocationSerializer(serializers.ModelSerializer):
 
 
 class CanTeachAtSerializer(serializers.ModelSerializer):
+    location = LocationSerializer()
+
     class Meta:
         model = CanTeachAt
         fields = [
@@ -30,17 +32,16 @@ class CanTeachAtSerializer(serializers.ModelSerializer):
         ]
 
 
-class TimeslotSerializer(serializers.ModelSerializer):
-    locations = CanTeachAtSerializer(many=True)
+# TODO: Check that profile object passed is_teacher
+class InstructorSerializer(serializers.ModelSerializer):
+    canteachat_set = CanTeachAtSerializer(many=True)
 
     class Meta:
-        model = Timeslot
+        model = Profile
         fields = [
-            "id",
-            "instructor",
-            "dayofweek",
-            "time",
-            "locations",
+            "display_name",
+            "email",
+            "canteachat_set",
         ]
 
 

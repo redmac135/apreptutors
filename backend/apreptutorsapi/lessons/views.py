@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .models import Timeslot
-from .serializers import TimeslotSerializer
+from .models import Timeslot, Profile
+from .serializers import InstructorSerializer
 from rest_framework.response import Response
 
 
 # Create your views here.
-class TimeslotAPI(APIView):
-    model_class = Timeslot
-    serializer_class = TimeslotSerializer
+class InstructorAPI(APIView):
+    model_class = Profile
+    serializer_class = InstructorSerializer
 
     def get(self, request, pk):
         timeslot = self.model_class.objects.get(pk=pk)
