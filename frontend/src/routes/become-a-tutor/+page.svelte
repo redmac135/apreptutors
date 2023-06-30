@@ -66,42 +66,290 @@
 		{ id: 13, name: 'Fairview Library', address: 'https://goo.gl/maps/z7XThQ71vN8iExAXA' }
 	];
 	const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-	const timeslots = ['Early afternoons (12-4pm)', 'Late afternoons (4-7pm)', 'Evenings (7-10pm)'];
+	const timeslots = [
+		'9:00 AM - 10:30 AM',
+		'10:30 AM - 12:00 PM',
+		'12:00 PM - 1:30 PM',
+		'1:30 PM - 3:00 PM',
+		'3:00 PM - 4:30 PM',
+		'4:30 PM - 6:00 PM',
+		'6:00 PM - 7:30 PM',
+		'7:30 PM - 9:00 PM',
+		'9:00 PM - 10:30 PM'
+	];
+
+	type FormData = {
+		subjects: number[];
+		locations: number[];
+		timeslots: {
+			monday: number[];
+			tuesday: number[];
+			wednesday: number[];
+			thursday: number[];
+			friday: number[];
+			saturday: number[];
+			sunday: number[];
+		};
+	};
+
+	function handleSubmit(e: any) {
+		const ACTION_URL = e.target.action;
+		const FORM_DATA = new FormData(e.target);
+		let data: FormData = {
+			subjects: [],
+			locations: [],
+			timeslots: {
+				monday: [],
+				tuesday: [],
+				wednesday: [],
+				thursday: [],
+				friday: [],
+				saturday: [],
+				sunday: []
+			}
+		};
+
+		for (const field of FORM_DATA) {
+			let [key, value] = field;
+			if (key === 'subject') {
+				data.subjects.push(parseInt(value.toString()));
+			} else if (key === 'location') {
+				data.locations.push(parseInt(value.toString()));
+			} else if (key === 'timeslot') {
+				let [day, timeslot] = value.toString().split('-');
+				// @ts-ignore
+				data.timeslots[day.toLowerCase()].push(parseInt(timeslot));
+			} // else?
+		}
+
+		// check if any fields are empty
+		if (
+			data.subjects.length === 0 ||
+			data.locations.length === 0 ||
+			!Object.values(data.timeslots).some((day) => day.length > 0)
+		) {
+			alert('Please fill out all fields.');
+			return;
+		}
+
+		// @ts-ignore
+		const auth = getAuth(app);
+		const user = auth.currentUser;
+		if (!user) {
+			alert('Please log in first.');
+			return;
+		}
+		user.getIdToken().then((token) => {
+			fetch(ACTION_URL, {
+				method: 'POST',
+				body: JSON.stringify(data),
+				headers: {
+					Authorization: token
+				}
+			})
+				.then((res) => {
+					if (res.status === 200) {
+						// TODO: change this redirect
+						window.location.href = '/comingsoon';
+					} else {
+						alert('Something went wrong. Please try again.');
+					}
+				})
+				.catch((err) => {
+					console.error(err);
+					alert('Something went wrong. Please try again.');
+				});
+		});
+	}
 </script>
 
-<form action="POST">
-	<div class="form-section">
-		<p class="question">What courses can you teach?</p>
-		{#each subjects as subject}
-			<input type="checkbox" name="subject" value={subject.id.toString()} />
-			<label for={subject.id.toString()}>{subject.subject}</label>
-		{/each}
-	</div>
+<div class="container">
+	<form action="/api/createtutor" on:submit|preventDefault={handleSubmit}>
+		<h1>Sign up to tutor with aPrep Tutors</h1>
+		<p>Please answer the following questions so we can best pair you with suitable students.</p>
 
-	<div class="form-section">
-		<p class="question">What location can you teach at?</p>
-		{#each locations as location}
-			<input type="checkbox" name="location" value={location.id.toString()} />
-			<label for={location.id.toString()}>
-				<a href={location.address}>{location.name}</a>
-			</label>
-		{/each}
-	</div>
+		<div class="divider" />
 
-	<div class="form-section">
-		<p class="question">At what times are you available?</p>
-		{#each timeslots as tslot}
-			<span>{tslot}</span>
-		{/each}
-		{#each days as day}
-			<span>{day}</span>
-			{#each timeslots as tslot}
-				<input type="checkbox" name="timeslot" value={day + tslot} />
+		<div class="form-section">
+			<h2>What courses can you teach?</h2>
+			{#each subjects as subject}
+				<div class="select">
+					<input
+						type="checkbox"
+						name="subject"
+						value={subject.id.toString()}
+						id={`subject${subject.id}`}
+					/>
+					<label for={`subject${subject.id}`}>{subject.subject}</label>
+				</div>
 			{/each}
-		{/each}
-	</div>
-</form>
+		</div>
+
+		<div class="divider" />
+
+		<div class="form-section">
+			<h2>What location can you teach at?</h2>
+			{#each locations as location}
+				<div class="select">
+					<input
+						type="checkbox"
+						name="location"
+						value={location.id.toString()}
+						id={`location${location.id}`}
+					/>
+					<label for={`location${location.id}`}>
+						{location.name}
+						<a href={location.address} title={`View ${location.name} on Google Maps`}>
+							<svg
+								class="link-icon"
+								xmlns="http://www.w3.org/2000/svg"
+								height="1em"
+								viewBox="0 0 512 512"
+							>
+								<path
+									d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"
+								/>
+							</svg>
+						</a>
+					</label>
+				</div>
+			{/each}
+		</div>
+
+		<div class="divider" />
+
+		<div class="form-section">
+			<h2>At what times are you available?</h2>
+			<table id="time-selection">
+				<tr>
+					<th />
+					{#each days as day}
+						<th>{day}</th>
+					{/each}
+				</tr>
+				{#each timeslots as tslot, i}
+					<tr>
+						<th>{tslot}</th>
+						{#each days as day}
+							<td><input type="checkbox" name="timeslot" value={`${day}-${i}`} /></td>
+						{/each}
+					</tr>
+				{/each}
+			</table>
+		</div>
+
+		<input type="submit" value="Submit" />
+	</form>
+</div>
 
 <style>
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 
+	form {
+		background-color: var(--beige);
+		padding: 1.5rem;
+		margin: 2rem;
+		border-radius: 0.3rem;
+	}
+
+	h1 {
+		font-size: 2rem;
+	}
+
+	p {
+		font-size: 1.2rem;
+		margin: 0.5rem 0;
+	}
+
+	.divider {
+		width: 100%;
+		height: 4px;
+		background-color: var(--white);
+		margin: 1rem 0;
+		border-radius: 99rem;
+	}
+
+	h2 {
+		font-size: 1.5rem;
+		font-weight: bold;
+		margin-bottom: 1rem;
+	}
+
+	.form-section {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 2rem;
+	}
+
+	/* first two questions */
+	.select {
+		margin-left: 0.5rem;
+		margin-top: 0.1rem;
+	}
+
+	input {
+		margin-right: 1rem;
+	}
+
+	label {
+		font-size: 1.2rem;
+	}
+
+	a {
+		color: var(--dark-blue);
+		align-self: center;
+	}
+
+	.link-icon {
+		width: 0.8rem;
+		height: 0.8rem;
+		margin-left: 0.3rem;
+	}
+
+	/* third question */
+	#time-selection {
+		border-collapse: collapse;
+	}
+
+	tr:first-child {
+		background-color: var(--light-blue);
+	}
+
+	tr:nth-child(even) {
+		background-color: var(--white);
+	}
+
+	th {
+		padding: 0.5rem 1rem;
+		font-size: 1.2rem;
+		font-weight: bold;
+	}
+
+	td {
+		padding: 0.5rem 1rem;
+		text-align: center;
+	}
+
+	/* submit button */
+	input[type='submit'] {
+		display: block;
+		background-color: var(--dark-blue);
+		color: var(--white);
+		border: none;
+		border-radius: 0.3rem;
+		padding: 1rem 1.5rem;
+		font-size: 1.5rem;
+		font-weight: bold;
+		cursor: pointer;
+		transition: background-color 0.2s ease-in-out;
+		margin: auto;
+	}
+
+	input[type='submit']:hover {
+		background-color: var(--light-blue);
+	}
 </style>
