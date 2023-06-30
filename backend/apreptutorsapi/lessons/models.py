@@ -1,19 +1,9 @@
 import datetime
 from django.db import models
-from django.contrib.auth.models import User
+from auth_firebase.models import Profile
 
 
 # Create your models here.
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = models.IntegerField()
-    is_student = models.BooleanField(default=False)
-    is_teacher = models.BooleanField(default=False)
-
-    def __str__(self) -> str:
-        return str(self.user)
-
-
 class Qualification(models.Model):
     IB_COURSE_TYPES = [("HL", "HL"), ("SL", "SL")]
 
