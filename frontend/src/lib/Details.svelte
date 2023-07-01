@@ -44,6 +44,7 @@
 		border-top: 2px solid var(--dark-blue);
 		margin-top: 1rem;
 		padding-top: 1rem;
+		line-height: 1.5;
 	}
 
 	@media (min-width: 500px) {

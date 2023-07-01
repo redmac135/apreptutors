@@ -4,7 +4,7 @@
 			<h1 class="title">Our Mission</h1>
 			<p class="description">
 				Preparing future IB students to excel in examinations with curated lessons, networking with
-				recent alumni, and a vast databank of resources specifically for IB students.
+				recent alumni, and a vast database of resources specifically for IB students.
 			</p>
 		</div>
 		<div class="info-container">
@@ -58,6 +58,7 @@
 		font-size: 1.5rem;
 		width: 20rem;
 		text-align: center;
+		line-height: 1.5;
 	}
 
 	.info-container {

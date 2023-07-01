@@ -6,7 +6,7 @@
 	<div class="top">
 		<div class="col-1">
 			<h1 class="logo">aPrep Tutors</h1>
-			<p class="slogan">For ib students<br>By ib students</p>
+			<p class="slogan">For ib students<br />By ib students</p>
 			<div class="socials">
 				<a href="mailto:info@apreptutors.com" target="_blank" rel="noopener noreferrer"
 					><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"
@@ -29,15 +29,15 @@
 		<div class="col-2">
 			<h2>About</h2>
 			<ul>
-				<li>About us</li>
-				<li>Our tutors</li>
-				<li>Pricing</li>
+				<li><a href="/#aboutus">About us</a></li>
+				<li><a href="/comingsoon">Our tutors</a></li>
+				<li><a href="/#pricing">Pricing</a></li>
 			</ul>
 		</div>
 		<div class="col-2">
 			<h2>Support</h2>
 			<ul>
-				<li>Become a tutor</li>
+				<li><a href="/become-a-tutor">Become a tutor</a></li>
 			</ul>
 		</div>
 	</div>
@@ -112,6 +112,16 @@
 	ul li {
 		margin-top: 0.5rem;
 		font-size: 1.5rem;
+	}
+
+	a {
+		text-decoration: none;
+		border-bottom: 2px solid transparent;
+		transition: 0.2s;
+	}
+
+	a:hover {
+		border-color: var(--light-blue);
 	}
 
 	.line {
