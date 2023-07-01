@@ -14,12 +14,8 @@
 
 <div class="container">
 	<img class="logo" src="images/logos/logo1.png" alt="aprep tutors logo" />
-	<h1>Good to see you again!</h1>
-	<button class="login-google" on:click={loginWithGoogle}>Login with Google</button>
-	<div class="or-container">
-		<span class="or-text">or</span>
-	</div>
-	<a class="sign-up-button" href="/signup">Sign up</a>
+	<h1>Your journey to success starts here!</h1>
+	<button class="login-google" on:click={loginWithGoogle}>Sign up with Google</button>
 </div>
 
 <style>
@@ -74,59 +70,5 @@
 
 	.login-google:hover {
 		box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
-	}
-
-	/* or text */
-	.or-container {
-		position: relative;
-        margin: 0.5rem 0;
-	}
-
-	.or-text {
-		position: relative;
-		display: inline-block;
-		padding: 0 10px;
-	}
-
-	.or-text::before,
-	.or-text::after {
-		content: '';
-		position: absolute;
-		top: 50%;
-		/* 56px came from guess and check */
-		width: calc((var(--content-width) - 56px) / 2);
-		height: 1px;
-		background-color: black;
-	}
-
-	.or-text::before {
-		right: 100%;
-		margin-right: 10px;
-	}
-
-	.or-text::after {
-		left: 100%;
-		margin-left: 10px;
-	}
-
-	/* sign up button */
-	.sign-up-button {
-		background-color: var(--dark-blue);
-		border: 2px var(--dark-blue) solid;
-		border-radius: 3px;
-		color: var(--white);
-		cursor: pointer;
-		font-size: 14px;
-		font-weight: 500;
-		padding: 12px 16px;
-		text-decoration: none;
-		transition: 0.3s;
-		width: var(--content-width);
-		text-align: center;
-	}
-
-	.sign-up-button:hover {
-		background-color: var(--white);
-		color: var(--dark-blue);
 	}
 </style>
