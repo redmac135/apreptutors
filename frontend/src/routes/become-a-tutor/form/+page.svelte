@@ -266,6 +266,7 @@
 		padding: 1.5rem;
 		margin: 2rem;
 		border-radius: 0.3rem;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
 	}
 
 	h1 {

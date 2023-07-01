@@ -19,7 +19,7 @@
 		<li class="link"><a href="/#pricing">Pricing</a></li>
 		<li class="link"><a href="/become-a-tutor">Become a Tutor</a></li>
 		<div class="divider-vertical" />
-		<li class="link"><a href="/comingsoon">Log In</a></li>
+		<li class="link"><a href="/login">Log In</a></li>
 		<li class="link"><a href="/comingsoon">中文</a></li>
 		<!-- todo: change href to find-a-tutor -->
 		<li><a href="/comingsoon"><button class="button">Find a Tutor</button></a></li>

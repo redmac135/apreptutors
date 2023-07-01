@@ -37,6 +37,7 @@
 		<div class="col-2">
 			<h2>Support</h2>
 			<ul>
+				<li><a href="/login">Login</a></li>
 				<li><a href="/become-a-tutor">Become a tutor</a></li>
 			</ul>
 		</div>
