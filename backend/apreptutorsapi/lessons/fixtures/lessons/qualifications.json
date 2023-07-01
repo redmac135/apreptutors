@@ -1,0 +1,106 @@
+[
+    {
+        "model": "lessons.qualification",
+        "pk": 1,
+        "fields": {
+            "type": "HL",
+            "name": "Math AA"
+        }
+    },
+    {
+        "model": "lessons.qualification",
+        "pk": 2,
+        "fields": {
+            "type": "HL",
+            "name": "Chemistry"
+        }
+    },
+    {
+        "model": "lessons.qualification",
+        "pk": 3,
+        "fields": {
+            "type": "HL",
+            "name": "Biology"
+        }
+    },
+    {
+        "model": "lessons.qualification",
+        "pk": 4,
+        "fields": {
+            "type": "HL",
+            "name": "Physics"
+        }
+    },
+    {
+        "model": "lessons.qualification",
+        "pk": 5,
+        "fields": {
+            "type": "HL",
+            "name": "English Literature"
+        }
+    },
+    {
+        "model": "lessons.qualification",
+        "pk": 6,
+        "fields": {
+            "type": "HL",
+            "name": "Economics"
+        }
+    },
+    {
+        "model": "lessons.qualification",
+        "pk": 7,
+        "fields": {
+            "type": "SL",
+            "name": "Math AA"
+        }
+    },
+    {
+        "model": "lessons.qualification",
+        "pk": 8,
+        "fields": {
+            "type": "SL",
+            "name": "Chemistry"
+        }
+    },
+    {
+        "model": "lessons.qualification",
+        "pk": 9,
+        "fields": {
+            "type": "SL",
+            "name": "Biology"
+        }
+    },
+    {
+        "model": "lessons.qualification",
+        "pk": 10,
+        "fields": {
+            "type": "SL",
+            "name": "Physics"
+        }
+    },
+    {
+        "model": "lessons.qualification",
+        "pk": 11,
+        "fields": {
+            "type": "SL",
+            "name": "English Literature"
+        }
+    },
+    {
+        "model": "lessons.qualification",
+        "pk": 12,
+        "fields": {
+            "type": "SL",
+            "name": "French"
+        }
+    },
+    {
+        "model": "lessons.qualification",
+        "pk": 13,
+        "fields": {
+            "type": "SL",
+            "name": "Economics"
+        }
+    }
+]
