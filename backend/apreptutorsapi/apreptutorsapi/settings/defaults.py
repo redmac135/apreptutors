@@ -48,10 +48,18 @@ FIREBASE_CLIENT_X509_CERT_URL = env("FIREBASE_CLIENT_X509_CERT_URL")
 FIREBASE_UNIVERSE_DOMAIN = env("FIREBASE_UNIVERSE_DOMAIN")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = []
 
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS',
+]
 
 # Application definition
 

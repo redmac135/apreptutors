@@ -34,6 +34,16 @@ class LocationsListAPI(APIView):
         return Response(serializer.data)
     
 
+# class UserTypeAPI(APIView):
+#     model_class = Profile
+
+#     def get(self, request, pk):
+#         user = self.model_class.objects.get(pk=pk)
+#         response = {
+#             "type": 
+#         }
+    
+
 class TimeslotAPI(APIView):
     model_class = Timeslot
     serializer_class = TimeslotSerializer
@@ -49,7 +59,5 @@ class TimeslotsListAPI(APIView):
 
     def get(self, request, qualification_pk):
         timeslots = self.model_class.objects.filter(instructor__instructorqualification_set__qualification__pk=qualification_pk)
-        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-        print(timeslots)
         serializer = self.serializer_class(timeslots, many=True)
         return Response(serializer.data)
