@@ -12,15 +12,17 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+from .env import env
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-&p-3--jo$@ssjhsq_br48r@u&78#v#s$2475z7!4bim%k2%2+1"
+SECRET_KEY = env("SECRET_KEY")
 
 # Firebase Creds
 import os
@@ -34,14 +36,14 @@ FIREBASE_ACCOUNT_TYPE = env("FIREBASE_ACCOUNT_TYPE")
 FIREBASE_PROJECT_ID = env("FIREBASE_PROJECT_ID")
 FIREBASE_PRIVATE_KEY_ID = env("FIREBASE_PRIVATE_KEY_ID")
 FIREBASE_PRIVATE_KEY = env("FIREBASE_PRIVATE_KEY")
-FIREBASE_PRIVATE_KEY = FIREBASE_PRIVATE_KEY.replace(r'\n','\n') # Don't know why we need to do this, but don't delete this line
+FIREBASE_PRIVATE_KEY = FIREBASE_PRIVATE_KEY.replace(
+    r"\n", "\n"
+)  # Don't know why we need to do this, but don't delete this line
 FIREBASE_CLIENT_EMAIL = env("FIREBASE_CLIENT_EMAIL")
 FIREBASE_CLIENT_ID = env("FIREBASE_CLIENT_ID")
 FIREBASE_AUTH_URI = env("FIREBASE_AUTH_URI")
 FIREBASE_TOKEN_URI = env("FIREBASE_TOKEN_URI")
-FIREBASE_AUTH_PROVIDER_X509_CERT_URL = env(
-    "FIREBASE_AUTH_PROVIDER_X509_CERT_URL"
-)
+FIREBASE_AUTH_PROVIDER_X509_CERT_URL = env("FIREBASE_AUTH_PROVIDER_X509_CERT_URL")
 FIREBASE_CLIENT_X509_CERT_URL = env("FIREBASE_CLIENT_X509_CERT_URL")
 FIREBASE_UNIVERSE_DOMAIN = env("FIREBASE_UNIVERSE_DOMAIN")
 
@@ -94,17 +96,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "apreptutorsapi.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
 
 
 # Password validation

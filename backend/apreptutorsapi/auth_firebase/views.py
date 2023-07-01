@@ -6,6 +6,7 @@ from .models import Profile
 from rest_framework.permissions import IsAuthenticated
 from auth_firebase.authentication import FirebaseAuthentication
 
+
 class ProfileAPIView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [FirebaseAuthentication]

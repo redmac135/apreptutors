@@ -127,8 +127,11 @@ class Location(models.Model):
 
 
 class CanTeachAt(models.Model):
-    instructor = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    instructor = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="canteachat_set")
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return str(self.instructor) + " at " + str(self.location)
 
     @classmethod
     def create_relationship(cls, instructor: Profile, location: Location):
