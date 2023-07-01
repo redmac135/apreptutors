@@ -25,7 +25,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = env("SECRET_KEY")
 
 # Firebase Creds
-import os
 import environ
 
 env = environ.Env()
@@ -51,6 +50,10 @@ FIREBASE_UNIVERSE_DOMAIN = env("FIREBASE_UNIVERSE_DOMAIN")
 ALLOWED_HOSTS = []
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "https://apreptutors.ca",
+]
 
 CORS_ALLOW_METHODS = [
     'GET',
