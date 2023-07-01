@@ -48,4 +48,13 @@ class InstructorSerializer(serializers.ModelSerializer):
         ]
 
 
-# WHERE YOU LEFT OFF: You need to figure out how to get a list of locations from a timeslot into the serializer, rn it's only 1 level deep but you need it 2 levels deep
+class TimeslotSerializer(serializers.ModelSerializer):
+    instructor = InstructorSerializer()
+
+    class Meta:
+        model = Timeslot
+        fields = [
+            "weekday",
+            "start_time",
+            "instructor",
+        ]
