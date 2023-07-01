@@ -19,7 +19,7 @@
 			<img src="images/universities/mcmastercrest.png" alt="mcmaster university crest" class="mcmaster-crest" />
 		</div>
 		<!-- TODO update anchor -->
-		<button><a href="/#">Learn more about our tutors</a></button>
+		<button><a href="/our-story">Learn more about our tutors</a></button>
 	</div>
 </div>
 
