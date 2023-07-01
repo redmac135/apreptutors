@@ -24,7 +24,7 @@ class Qualification(models.Model):
 
 
 class InstructorQualification(models.Model):
-    instructor = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    instructor = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="instructorqualification_set")
     qualification = models.ForeignKey(Qualification, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
