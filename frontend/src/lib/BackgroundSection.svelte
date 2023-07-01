@@ -9,14 +9,14 @@
 			school.
 		</p>
 		<div class="uni-logo-container">
-			<img src="images/western.png" alt="western university logo" class="western-logo" />
-			<img src="images/waterloo.png" alt="waterloo university logo" class="waterloo-logo" />
-			<img src="images/mcmaster.png" alt="mcmaster university logo" class="mcmaster-logo" />
+			<img src="images/universities/western.png" alt="western university logo" class="western-logo" />
+			<img src="images/universities/waterloo.png" alt="waterloo university logo" class="waterloo-logo" />
+			<img src="images/universities/mcmaster.png" alt="mcmaster university logo" class="mcmaster-logo" />
 		</div>
 		<div class="uni-crest-container">
-			<img src="images/westerncrest.png" alt="western university crest" class="western-crest" />
-			<img src="images/waterloocrest.png" alt="waterloo university crest" class="waterloo-crest" />
-			<img src="images/mcmastercrest.png" alt="mcmaster university crest" class="mcmaster-crest" />
+			<img src="images/universities/westerncrest.png" alt="western university crest" class="western-crest" />
+			<img src="images/universities/waterloocrest.png" alt="waterloo university crest" class="waterloo-crest" />
+			<img src="images/universities/mcmastercrest.png" alt="mcmaster university crest" class="mcmaster-crest" />
 		</div>
 		<!-- TODO update anchor -->
 		<button><a href="/#">Learn more about our tutors</a></button>
