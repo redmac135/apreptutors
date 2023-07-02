@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import firebaseApp from './store';
 	import Navbar from '../lib/Navbar.svelte';
 	import Footer from '../lib/Footer.svelte';
 	import InfoBar from '../lib/InfoBar.svelte';
