@@ -179,8 +179,6 @@ class RegisterLessonAPI(APIView):
             FirebaseAuthentication(), request
         )[0]
 
-        data = {"timeslots": [0, 1], "subject": 3, "location": 4}
-
         if not len(data["timeslots"]) == 2:
             raise ValueError("Only 2 Timeslots Allowed")
         for timeslot in data["timeslots"]:
