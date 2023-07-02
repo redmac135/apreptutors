@@ -9,6 +9,7 @@
 	const { subjects, locations } = data;
 
 	const checkLoggedIn = () => {
+		return true; // REMOVE
 		const app = get(firebaseApp);
 		// @ts-ignore
 		const auth = getAuth(app);
@@ -190,7 +191,16 @@
 						<tr>
 							<th>{tslot}</th>
 							{#each days as day}
-								<td><input type="checkbox" name="timeslot" value={`${day}-${i}`} /></td>
+								<td>
+									<input
+										type="checkbox"
+										name="timeslot"
+										class="timeslot-checkbox"
+										value={`${day}-${i}`}
+										id={`${day}-${i}`}
+									/>
+									<label for={`${day}-${i}`} class="timeslot-option" />
+								</td>
 							{/each}
 						</tr>
 					{/each}
@@ -214,6 +224,24 @@
 		margin: 2rem;
 		border-radius: 0.3rem;
 		box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+	}
+
+	.timeslot-option {
+		display: block;
+		height: 100%;
+		width: 100%;
+		padding: 0.75rem;
+		background-color: var(--light-blue);
+		border-radius: 5%;
+	}
+
+	.timeslot-checkbox:checked + label.timeslot-option {
+		scale: 0.9;
+		background-color: blue;
+	}
+
+	.timeslot-checkbox {
+		display: none;
 	}
 
 	h1 {
@@ -300,6 +328,11 @@
 		border-collapse: collapse;
 	}
 
+	table {
+		min-width: 100%;
+		table-layout: fixed;
+	}
+
 	tr:first-child {
 		background-color: var(--light-blue);
 	}
@@ -309,7 +342,8 @@
 	}
 
 	th {
-		padding: 0.5rem 1rem;
+		width: 8.5rem;
+		padding: 0.25rem 1rem;
 		font-weight: bold;
 	}
 
