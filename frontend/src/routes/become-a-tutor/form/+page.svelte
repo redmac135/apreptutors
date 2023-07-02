@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+	import { getAuth } from 'firebase/auth';
 	import { get } from 'svelte/store';
 	import firebaseApp from '../../store';
 	import { apiUrl } from '$lib/api';
 
-	// from +page.server.ts
+	// from +page.ts
 	export let data: any;
 	const { subjects, locations } = data;
 
