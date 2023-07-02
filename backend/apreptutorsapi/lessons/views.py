@@ -78,7 +78,6 @@ class InstructorSignupAPI(APIView):
 
     def post(self, request):
         data = json.loads(request.body)
-        print(data)
         user: Profile = self.authentication_classes[0].authenticate(
             FirebaseAuthentication(), request
         )[0]
@@ -90,8 +89,6 @@ class InstructorSignupAPI(APIView):
         # Check that Verification code works
         verification_code = data["verification"]
         correct_code = str(hashlib.md5(user.email.encode()).hexdigest())
-        print(verification_code)
-        print(correct_code)
         if not verification_code == correct_code:
             return Response({"reponse": "Invalid verification code."}, status=status.HTTP_200_OK)
 
@@ -99,57 +96,48 @@ class InstructorSignupAPI(APIView):
 
         # Create Instructor Qualifications
         for subject_pk in data["subjects"]:
-            print("subject_pk: " + str(subject_pk))
             InstructorQualification.create_instructorqualification(
                 instructor=user, qualification=Qualification.objects.get(pk=subject_pk)
             )
 
         # Create CanTeachAt Instances
         for location_pk in data["locations"]:
-            print("location_pk: " + str(location_pk))
             CanTeachAt.create_relationship(
                 instructor=user, location=Location.objects.get(pk=location_pk)
             )
 
         # Create Timeslot Instances
         for time in data["timeslots"]["sunday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.SUNDAY, start_time=time, instructor=user
             )
 
         for time in data["timeslots"]["monday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.MONDAY, start_time=time, instructor=user
             )
 
         for time in data["timeslots"]["tuesday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.TUESDAY, start_time=time, instructor=user
             )
 
         for time in data["timeslots"]["wednesday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.WEDNESDAY, start_time=time, instructor=user
             )
 
         for time in data["timeslots"]["thursday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.THURSDAY, start_time=time, instructor=user
             )
 
         for time in data["timeslots"]["friday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.FRIDAY, start_time=time, instructor=user
             )
 
         for time in data["timeslots"]["saturday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.SATURDAY, start_time=time, instructor=user
             )
