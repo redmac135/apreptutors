@@ -112,30 +112,6 @@ class Timeslot(models.Model):
         return self
 
 
-class Lesson(models.Model):
-    timeslot = models.ForeignKey(Timeslot, null=True, on_delete=models.SET_NULL)
-    student = models.ForeignKey(Profile, null=True, on_delete=models.SET_NULL)
-    subject = models.ForeignKey(Qualification, null=True, on_delete=models.SET_NULL)
-
-    def __str__(self) -> str:
-        return str(self.subject) + " " + str(self.timeslot) + " " + str(self.student)
-
-    @classmethod
-    def create_lesson(
-        cls, timeslot: Timeslot, student: Profile, subject: Qualification
-    ):
-        if not student.is_student:
-            raise PermissionError("Not Student")
-        instructor = timeslot.instructor
-        if not subject.check_qualified(instructor):
-            raise PermissionError("Not Qualified")
-        obj = cls.objects.get_or_create(
-            timeslot=timeslot, student=student, subject=subject
-        )
-        timeslot.set_unavailable()
-        return obj
-
-
 class Location(models.Model):
     name = models.CharField(max_length=512)
     address = models.CharField(max_length=512)
@@ -160,4 +136,29 @@ class CanTeachAt(models.Model):
         obj, created = cls.objects.get_or_create(
             instructor=instructor, location=location
         )
+        return obj
+
+
+class Lesson(models.Model):
+    timeslot = models.ForeignKey(Timeslot, null=True, on_delete=models.SET_NULL)
+    student = models.ForeignKey(Profile, null=True, on_delete=models.SET_NULL)
+    location = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
+    subject = models.ForeignKey(Qualification, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self) -> str:
+        return str(self.subject) + " " + str(self.timeslot) + " " + str(self.student)
+
+    @classmethod
+    def create_lesson(
+        cls, timeslot: Timeslot, student: Profile, subject: Qualification
+    ):
+        if not student.is_student:
+            raise PermissionError("Not Student")
+        instructor = timeslot.instructor
+        if not subject.check_qualified(instructor):
+            raise PermissionError("Not Qualified")
+        obj = cls.objects.get_or_create(
+            timeslot=timeslot, student=student, subject=subject
+        )
+        timeslot.set_unavailable()
         return obj
