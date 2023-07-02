@@ -9,7 +9,7 @@ class ProfileManager(models.Manager):
         display_name = user.display_name
         email = user.email
 
-        return super(self, ProfileManager).create(
+        return super(ProfileManager, self).create(
             uid=uid,
             display_name=display_name,
             email=email,
@@ -22,7 +22,7 @@ class ProfileManager(models.Manager):
         display_name = user.display_name
         email = user.email
 
-        return super(self, ProfileManager).create(
+        return super(ProfileManager, self).create(
             uid=uid,
             display_name=display_name,
             email=email,
