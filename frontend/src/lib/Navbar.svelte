@@ -25,7 +25,7 @@
 		<li class="link"><a on:click={close} href="/become-a-tutor">Become a Tutor</a></li>
 		<div class="divider-vertical" />
 		<li class="link"><a on:click={close} href="/login">Log In</a></li>
-		<li class="link"><a on:click={close} href="/comingsoon">中文</a></li>
+		<!-- <li class="link"><a on:click={close} href="/comingsoon">中文</a></li> -->
 		<!-- todo: change href to find-a-tutor -->
 		<li><a on:click={close} href="/comingsoon"><button class="button">Find a Tutor</button></a></li>
 	</ul>
