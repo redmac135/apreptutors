@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from auth_firebase.authentication import FirebaseAuthentication
 
 import json
+import hashlib
 
 
 # Create your views here.
@@ -81,8 +82,19 @@ class InstructorSignupAPI(APIView):
         user: Profile = self.authentication_classes[0].authenticate(
             FirebaseAuthentication(), request
         )[0]
+
+        # Ensure form only filled out once
         if user.is_teacher:
             raise PermissionError("You may only fill this out ONCE")
+        
+        # Check that Verification code works
+        verification_code = data["verification"]
+        correct_code = str(hashlib.md5(user.email.encode()).hexdigest())
+        print(verification_code)
+        print(correct_code)
+        if not verification_code == correct_code:
+            return Response({"reponse": "Invalid verification code."}, status=status.HTTP_200_OK)
+
         user.set_teacher(True)
 
         # Create Instructor Qualifications
@@ -142,4 +154,4 @@ class InstructorSignupAPI(APIView):
                 weekday=Timeslot.SATURDAY, start_time=time, instructor=user
             )
 
-        return Response(status=status.HTTP_200_OK)
+        return Response({"response": "Instructor profile created."}, status=status.HTTP_200_OK)

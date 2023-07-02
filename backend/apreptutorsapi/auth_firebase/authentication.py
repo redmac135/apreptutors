@@ -49,5 +49,5 @@ class FirebaseAuthentication(BaseAuthentication):
         except Exception:
             raise exceptions.FirebaseError()
         """Get or create the user"""
-        user = Profile.objects.get_or_create_student(uid=uid)
+        user = Profile.objects.get_or_create_by_uid(uid=uid)
         return (user, None)
