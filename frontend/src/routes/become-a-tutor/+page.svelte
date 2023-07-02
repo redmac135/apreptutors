@@ -12,9 +12,7 @@
 		</a>
 		for further inquiries!
 	</p>
-	<button>
-		<a id="a-button" href="/become-a-tutor/form">Get started</a>
-	</button>
+	<a id="a-button" href="/become-a-tutor/form">Get started</a>
 </div>
 
 <style>
@@ -22,10 +20,10 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-        text-align: center;
+		text-align: center;
 		padding: 4rem;
-        max-width: 40rem;
-        margin: 0 auto;
+		max-width: 40rem;
+		margin: 0 auto;
 	}
 
 	p {
@@ -33,7 +31,7 @@
 		margin: 0.5rem 0;
 	}
 
-	button {
+	#a-button {
 		background-color: var(--dark-blue);
 		border: none;
 		border-radius: 0.3rem;
@@ -41,17 +39,14 @@
 		cursor: pointer;
 		transition: background-color 0.2s ease-in-out;
 		margin-top: 1rem;
-	}
-
-	button:hover {
-		background-color: var(--light-blue);
-	}
-
-	#a-button {
 		color: var(--white);
 		text-decoration: none;
 		font-size: 1.5rem;
 		font-weight: bold;
+	}
+
+	#a-button:hover {
+		background-color: var(--light-blue);
 	}
 
 	#email {
