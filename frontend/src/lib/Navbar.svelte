@@ -3,26 +3,31 @@
 	function toggle() {
 		open = !open;
 	}
+	function close() {
+		open = false;
+	}
 </script>
 
 <nav>
 	<ul class="nav-left">
-		<li><a class="logo" href="/#">aPrep Tutors</a></li>
-		<button class="burger" on:click={toggle}>
-			<div class="line line1" />
-			<div class="line line2" />
-			<div class="line line3" />
+		<li>
+			<a on:click={close} class="logo" href="/#">aPrep Tutors</a>
+		</li>
+		<button class="burger" on:click={toggle} class:open>
+			<div />
+			<div />
+			<div />
 		</button>
 	</ul>
 	<ul class="nav-right" class:nav-open={open}>
-		<li class="link"><a href="/#aboutus">About us</a></li>
-		<li class="link"><a href="/#pricing">Pricing</a></li>
-		<li class="link"><a href="/become-a-tutor">Become a Tutor</a></li>
+		<li class="link"><a on:click={close} href="/#aboutus">About us</a></li>
+		<li class="link"><a on:click={close} href="/#pricing">Pricing</a></li>
+		<li class="link"><a on:click={close} href="/become-a-tutor">Become a Tutor</a></li>
 		<div class="divider-vertical" />
-		<li class="link"><a href="/login">Log In</a></li>
-		<li class="link"><a href="/comingsoon">中文</a></li>
+		<li class="link"><a on:click={close} href="/login">Log In</a></li>
+		<li class="link"><a on:click={close} href="/comingsoon">中文</a></li>
 		<!-- todo: change href to find-a-tutor -->
-		<li><a href="/comingsoon"><button class="button">Find a Tutor</button></a></li>
+		<li><a on:click={close} href="/comingsoon"><button class="button">Find a Tutor</button></a></li>
 	</ul>
 </nav>
 
@@ -46,11 +51,25 @@
 		border: none;
 	}
 
-	.line {
+	.burger > div {
 		width: 2rem;
 		height: 0.2rem;
 		background-color: black;
 		margin: 0.3rem;
+		border-radius: 5rem;
+		transition: all 0.3s ease;
+	}
+
+	.burger.open :nth-child(1) {
+		transform: rotate(45deg) translate(0.3rem, 0.4rem);
+	}
+
+	.burger.open :nth-child(2) {
+		opacity: 0;
+	}
+
+	.burger.open :nth-child(3) {
+		transform: rotate(-45deg) translate(0.3rem, -0.4rem);
 	}
 
 	ul {
