@@ -71,7 +71,8 @@ class TimeslotsListAPI(APIView):
 
     def get(self, request, qualification_pk):
         timeslots = self.model_class.objects.filter(
-            instructor__instructorqualification_set__qualification__pk=qualification_pk
+            instructor__instructorqualification_set__qualification__pk=qualification_pk,
+            is_available=True,
         )
         serializer = self.serializer_class(timeslots, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

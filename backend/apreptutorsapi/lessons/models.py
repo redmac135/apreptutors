@@ -106,6 +106,11 @@ class Timeslot(models.Model):
             )
             return obj
 
+    def set_unavailable(self):
+        self.is_available = False
+        self.save()
+        return self
+
 
 class Lesson(models.Model):
     timeslot = models.ForeignKey(Timeslot, null=True, on_delete=models.SET_NULL)
@@ -116,12 +121,19 @@ class Lesson(models.Model):
         return str(self.subject) + " " + str(self.timeslot) + " " + str(self.student)
 
     @classmethod
-    def create_lesson(timeslot: Timeslot, student: Profile, subject: Qualification):
+    def create_lesson(
+        cls, timeslot: Timeslot, student: Profile, subject: Qualification
+    ):
         if not student.is_student:
             raise PermissionError("Not Student")
         instructor = timeslot.instructor
         if not subject.check_qualified(instructor):
             raise PermissionError("Not Qualified")
+        obj = cls.objects.get_or_create(
+            timeslot=timeslot, student=student, subject=subject
+        )
+        timeslot.set_unavailable()
+        return obj
 
 
 class Location(models.Model):
