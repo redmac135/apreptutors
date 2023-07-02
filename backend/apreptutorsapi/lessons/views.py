@@ -44,6 +44,8 @@ class LocationsListAPI(APIView):
 class UserTypeAPI(APIView):
     model_class = Profile
 
+    permission_classes = [FirebaseAuthentication]
+
     def get(self, request, pk):
         user: Profile = self.model_class.objects.get(pk=pk)
         response = {
@@ -87,12 +89,14 @@ class InstructorSignupAPI(APIView):
         # Ensure form only filled out once
         if user.is_teacher:
             raise PermissionError("You may only fill this out ONCE")
-        
+
         # Check that Verification code works
         verification_code = data["verification"]
         correct_code = str(hashlib.md5(user.email.encode()).hexdigest())
         if not verification_code == correct_code:
-            return Response({"reponse": "Invalid verification code."}, status=status.HTTP_200_OK)
+            return Response(
+                {"reponse": "Invalid verification code."}, status=status.HTTP_200_OK
+            )
 
         user.set_teacher(True)
 
@@ -144,7 +148,9 @@ class InstructorSignupAPI(APIView):
                 weekday=Timeslot.SATURDAY, start_time=time, instructor=user
             )
 
-        return Response({"response": "Instructor profile created."}, status=status.HTTP_200_OK)
+        return Response(
+            {"response": "Instructor profile created."}, status=status.HTTP_200_OK
+        )
 
 
 class RegisteredLessonsAPI(APIView):
