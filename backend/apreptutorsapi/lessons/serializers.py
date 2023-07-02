@@ -6,7 +6,7 @@ class QualificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Qualification
         fields = [
-            "id",
+            "pk",
             "type",
             "name",
         ]

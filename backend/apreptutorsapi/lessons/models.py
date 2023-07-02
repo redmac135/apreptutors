@@ -24,7 +24,9 @@ class Qualification(models.Model):
 
 
 class InstructorQualification(models.Model):
-    instructor = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="instructorqualification_set")
+    instructor = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="instructorqualification_set"
+    )
     qualification = models.ForeignKey(Qualification, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
@@ -36,7 +38,10 @@ class InstructorQualification(models.Model):
     ):
         if not instructor.is_teacher:
             raise PermissionError("Not Teacher")
-        return cls.objects.create(instructor=instructor, qualification=qualification)
+        obj, created = cls.objects.get_or_create(
+            instructor=instructor, qualification=qualification
+        )
+        return obj
 
     @classmethod
     def get_qualifications_queryset(cls, instructor: Profile):
@@ -86,19 +91,20 @@ class Timeslot(models.Model):
     def create_timeslot(
         cls,
         weekday: str,
-        time: datetime.time,
+        start_time: int,
         instructor: Profile,
         is_available: bool = True,
     ) -> None:
         if not instructor.is_teacher:
             raise PermissionError("Not Teacher")
         else:
-            return cls.objects.create(
+            obj, created = cls.objects.get_or_create(
                 weekday=weekday,
-                time=time,
+                start_time=cls.ALLOWED_TIMES[start_time][0],
                 instructor=instructor,
                 is_available=is_available,
             )
+            return obj
 
 
 class Lesson(models.Model):
@@ -127,7 +133,9 @@ class Location(models.Model):
 
 
 class CanTeachAt(models.Model):
-    instructor = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="canteachat_set")
+    instructor = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="canteachat_set"
+    )
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
@@ -137,4 +145,7 @@ class CanTeachAt(models.Model):
     def create_relationship(cls, instructor: Profile, location: Location):
         if not instructor.is_teacher:
             raise PermissionError("Not Teacher")
-        return cls.objects.create(instructor=instructor, location=location)
+        obj, created = cls.objects.get_or_create(
+            instructor=instructor, location=location
+        )
+        return obj

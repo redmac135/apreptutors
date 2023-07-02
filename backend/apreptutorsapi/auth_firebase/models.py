@@ -16,3 +16,7 @@ class Profile(models.Model):
 
     def __str__(self):
         return str(self.display_name)
+
+    def set_teacher(self, is_teacher: bool):
+        self.is_teacher = is_teacher
+        return self
