@@ -19,10 +19,11 @@ class ProfileManager(models.Manager):
 
     def create_student(self, uid, **kwargs: Any):
         user = auth.get_user(uid)
-        display_name = user.getDisplayName()
-        email = user.getEmail()
+        print(user.__dir__())
+        display_name = user.display_name
+        email = user.email
 
-        return super(self, ProfileManager).create(
+        return super(ProfileManager, self).create(
             uid=uid,
             display_name=display_name,
             email=email,
