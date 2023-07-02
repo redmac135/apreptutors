@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from auth_firebase.authentication import FirebaseAuthentication
 
 import json
+import hashlib
 
 
 # Create your views here.
@@ -77,69 +78,68 @@ class InstructorSignupAPI(APIView):
 
     def post(self, request):
         data = json.loads(request.body)
-        print(data)
         user: Profile = self.authentication_classes[0].authenticate(
             FirebaseAuthentication(), request
         )[0]
+
+        # Ensure form only filled out once
         if user.is_teacher:
             raise PermissionError("You may only fill this out ONCE")
+        
+        # Check that Verification code works
+        verification_code = data["verification"]
+        correct_code = str(hashlib.md5(user.email.encode()).hexdigest())
+        if not verification_code == correct_code:
+            return Response({"reponse": "Invalid verification code."}, status=status.HTTP_200_OK)
+
         user.set_teacher(True)
 
         # Create Instructor Qualifications
         for subject_pk in data["subjects"]:
-            print("subject_pk: " + str(subject_pk))
             InstructorQualification.create_instructorqualification(
                 instructor=user, qualification=Qualification.objects.get(pk=subject_pk)
             )
 
         # Create CanTeachAt Instances
         for location_pk in data["locations"]:
-            print("location_pk: " + str(location_pk))
             CanTeachAt.create_relationship(
                 instructor=user, location=Location.objects.get(pk=location_pk)
             )
 
         # Create Timeslot Instances
         for time in data["timeslots"]["sunday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.SUNDAY, start_time=time, instructor=user
             )
 
         for time in data["timeslots"]["monday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.MONDAY, start_time=time, instructor=user
             )
 
         for time in data["timeslots"]["tuesday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.TUESDAY, start_time=time, instructor=user
             )
 
         for time in data["timeslots"]["wednesday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.WEDNESDAY, start_time=time, instructor=user
             )
 
         for time in data["timeslots"]["thursday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.THURSDAY, start_time=time, instructor=user
             )
 
         for time in data["timeslots"]["friday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.FRIDAY, start_time=time, instructor=user
             )
 
         for time in data["timeslots"]["saturday"]:
-            print("time: " + str(time))
             Timeslot.create_timeslot(
                 weekday=Timeslot.SATURDAY, start_time=time, instructor=user
             )
 
-        return Response(status=status.HTTP_200_OK)
+        return Response({"response": "Instructor profile created."}, status=status.HTTP_200_OK)
