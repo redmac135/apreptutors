@@ -12,4 +12,5 @@ urlpatterns = [
     ),
     path("qualifications/", QualificationsListAPI.as_view(), name="qualifications-api"),
     path("createtutor/", InstructorSignupAPI.as_view(), name="createtutor-api"),
+    path("registeredlessons/", RegisteredLessonsAPI.as_view(), name="registeredlessons-api"),
 ]

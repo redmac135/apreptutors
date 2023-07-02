@@ -4,7 +4,7 @@
 	import firebaseApp from '../../store';
 	import { apiUrl } from '$lib/api';
 
-	// from +page.server.ts
+	// from +page.ts
 	export let data: any;
 	const { subjects, locations } = data;
 
@@ -134,7 +134,7 @@
 
 			<div class="form-section">
 				<input type="text" name="verification" placeholder="Verification code" required />
-				<a href="/become-a-tutor/code">Didn't get a code?</a>
+				<p>Didn't get a code? Email info@apreptutors.ca!</p>
 			</div>
 
 			<div class="divider" />
