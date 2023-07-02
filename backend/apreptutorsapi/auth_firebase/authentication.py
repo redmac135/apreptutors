@@ -30,7 +30,7 @@ class FirebaseAuthentication(BaseAuthentication):
 
     def authenticate(self, request):
         """Get the authorization Token, It raise exception when no authorization Token is given"""
-        auth_header = request.META.get("Authorization")
+        auth_header = request.headers.get("Authorization")
         if not auth_header:
             raise exceptions.NoAuthToken("No auth token provided")
         """Decoding the Token It rasie exception when decode failed."""
@@ -49,5 +49,5 @@ class FirebaseAuthentication(BaseAuthentication):
         except Exception:
             raise exceptions.FirebaseError()
         """Get or create the user"""
-        user, created = Profile.objects.get_or_create_student(uid=uid)
+        user = Profile.objects.get_or_create_student(uid=uid)
         return (user, None)

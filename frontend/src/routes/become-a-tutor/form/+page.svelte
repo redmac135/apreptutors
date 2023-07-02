@@ -3,6 +3,7 @@
 	import { get } from 'svelte/store';
 	import firebaseApp from '../../store';
 	import { onMount } from 'svelte';
+	import { apiUrl } from '$lib/api';
 
 	const app = get(firebaseApp);
 	// @ts-ignore
@@ -167,7 +168,7 @@
 </script>
 
 <div class="container">
-	<form action="/api/createtutor" on:submit|preventDefault={handleSubmit}>
+	<form action={apiUrl("/api/createtutor")} on:submit|preventDefault={handleSubmit}>
 		<h1>Sign up to tutor with aPrep Tutors</h1>
 		<p>Please answer the following questions so we can best pair you with suitable students.</p>
 		{#if !loggedIn}
