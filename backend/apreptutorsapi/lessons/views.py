@@ -97,7 +97,7 @@ class TimeslotsListAPI(APIView):
                     "timeslots": self.serializer_class(valid_timeslots, many=True),
                 }
             )
-        return Response(response, status=status.HTTP_200_OK)
+        return Response({"data": response}, status=status.HTTP_200_OK)
 
 
 class InstructorSignupAPI(APIView):
