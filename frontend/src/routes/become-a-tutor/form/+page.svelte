@@ -140,8 +140,6 @@
 		{:else}
 			<p>Please answer the following questions so we can best pair you with suitable students.</p>
 
-			<div class="divider" />
-
 			<div class="form-section">
 				<input type="text" name="verification" placeholder="Verification code" required />
 				<a href="/become-a-tutor/code">Didn't get a code?</a>
@@ -261,6 +259,19 @@
 		display: flex;
 		flex-direction: column;
 		margin-bottom: 2rem;
+	}
+
+	/* verfication code */
+	input[type='text'] {
+		width: 100%;
+		height: 2rem;
+		font-size: 1.2rem;
+		padding: 0.5rem;
+		border-radius: 0.3rem;
+		border: 1px solid var(--dark-blue);
+		background-color: var(--white);
+		max-width: 25rem;
+		margin: 0.5rem 0;
 	}
 
 	/* first two questions */
