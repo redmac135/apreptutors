@@ -18,7 +18,7 @@ class InstructorAPI(APIView):
     def get(self, request, pk):
         timeslot = self.model_class.objects.get(pk=pk)
         serializer = self.serializer_class(timeslot)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class QualificationsListAPI(APIView):
@@ -28,7 +28,7 @@ class QualificationsListAPI(APIView):
     def get(self, request):
         qualifications = self.model_class.objects.all()
         serializer = self.serializer_class(qualifications, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class LocationsListAPI(APIView):
@@ -38,17 +38,19 @@ class LocationsListAPI(APIView):
     def get(self, request):
         locations = self.model_class.objects.all()
         serializer = self.serializer_class(locations, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-# class UserTypeAPI(APIView):
-#     model_class = Profile
+class UserTypeAPI(APIView):
+    model_class = Profile
 
-#     def get(self, request, pk):
-#         user = self.model_class.objects.get(pk=pk)
-#         response = {
-#             "type":
-#         }
+    def get(self, request, pk):
+        user: Profile = self.model_class.objects.get(pk=pk)
+        response = {
+            "is_student": user.is_student,
+            "is_teacher": user.is_teacher,
+        }
+        return Response(response, status=status.HTTP_200_OK)
 
 
 class TimeslotAPI(APIView):
@@ -58,7 +60,7 @@ class TimeslotAPI(APIView):
     def get(self, request, pk):
         timeslot = self.model_class.objects.get(pk=pk)
         serializer = self.serializer_class(timeslot)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class TimeslotsListAPI(APIView):
@@ -70,7 +72,7 @@ class TimeslotsListAPI(APIView):
             instructor__instructorqualification_set__qualification__pk=qualification_pk
         )
         serializer = self.serializer_class(timeslots, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class InstructorSignupAPI(APIView):
