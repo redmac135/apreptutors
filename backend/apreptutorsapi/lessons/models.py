@@ -24,7 +24,9 @@ class Qualification(models.Model):
 
 
 class InstructorQualification(models.Model):
-    instructor = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="instructorqualification_set")
+    instructor = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="instructorqualification_set"
+    )
     qualification = models.ForeignKey(Qualification, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
@@ -36,7 +38,9 @@ class InstructorQualification(models.Model):
     ):
         if not instructor.is_teacher:
             raise PermissionError("Not Teacher")
-        obj, created = cls.objects.get_or_create(instructor=instructor, qualification=qualification)
+        obj, created = cls.objects.get_or_create(
+            instructor=instructor, qualification=qualification
+        )
         return obj
 
     @classmethod
@@ -129,7 +133,9 @@ class Location(models.Model):
 
 
 class CanTeachAt(models.Model):
-    instructor = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="canteachat_set")
+    instructor = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="canteachat_set"
+    )
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
@@ -139,5 +145,7 @@ class CanTeachAt(models.Model):
     def create_relationship(cls, instructor: Profile, location: Location):
         if not instructor.is_teacher:
             raise PermissionError("Not Teacher")
-        obj, created = cls.objects.get_or_create(instructor=instructor, location=location)
+        obj, created = cls.objects.get_or_create(
+            instructor=instructor, location=location
+        )
         return obj

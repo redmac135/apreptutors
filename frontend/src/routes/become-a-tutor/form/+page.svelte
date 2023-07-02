@@ -2,7 +2,6 @@
 	import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 	import { get } from 'svelte/store';
 	import firebaseApp from '../../store';
-	import { onMount } from 'svelte';
 	import { apiUrl } from '$lib/api';
 
 	// from +page.server.ts
