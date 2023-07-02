@@ -66,7 +66,7 @@ class TimeslotAPI(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class TimeslotsListAPI(APIView):
+class TimeslotsListBySubjectAPI(APIView):
     model_class = Timeslot
     serializer_class = TimeslotSerializer
 
@@ -77,6 +77,27 @@ class TimeslotsListAPI(APIView):
         )
         serializer = self.serializer_class(timeslots, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class TimeslotsListAPI(APIView):
+    model_class = Timeslot
+    serializer_class = TimeslotSerializer
+
+    def get(self, request):
+        response = []
+        subjects = Qualification.objects.all()
+        for subject in subjects:
+            valid_timeslots = self.model_class.objects.filter(
+                instructor__instructorqualification_set__qualification=subject,
+                is_available=True,
+            )
+            response.append(
+                {
+                    "subjectId": subject.pk,
+                    "timeslots": self.serializer_class(valid_timeslots, many=True),
+                }
+            )
+        return Response(response, status=status.HTTP_200_OK)
 
 
 class InstructorSignupAPI(APIView):
