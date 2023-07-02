@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getAuth } from 'firebase/auth';
+	import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 	import { get } from 'svelte/store';
 	import firebaseApp from '../../store';
 	import { apiUrl } from '$lib/api';
@@ -12,6 +12,15 @@
 	// @ts-ignore
 	const auth = getAuth(app);
 	$: loggedIn = auth.currentUser ? true : false;
+
+	const checkLoggedIn = () => {
+		// @ts-ignore
+		const auth = getAuth(app);
+		if (auth.currentUser) {
+			return true;
+		}
+		return false;
+	};
 
 	const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 	const timeslots = [
@@ -126,6 +135,7 @@
 			<p>Please answer the following questions so we can best pair you with suitable students.</p>
 
 			<div class="form-section">
+				<input type="text" name="verification" placeholder="Verification code" required />
 				<p>Didn't get a code? Email info@apreptutors.ca!</p>
 			</div>
 
