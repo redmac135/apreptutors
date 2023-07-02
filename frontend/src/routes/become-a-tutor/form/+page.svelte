@@ -42,6 +42,7 @@
 	];
 
 	type FormData = {
+		verification: string;
 		subjects: number[];
 		locations: number[];
 		timeslots: {
@@ -59,6 +60,7 @@
 		const ACTION_URL = e.target.action;
 		const FORM_DATA = new FormData(e.target);
 		let data: FormData = {
+			verification: '',
 			subjects: [],
 			locations: [],
 			timeslots: {
@@ -82,6 +84,8 @@
 				let [day, timeslot] = value.toString().split('-');
 				// @ts-ignore
 				data.timeslots[day.toLowerCase()].push(parseInt(timeslot));
+			} else if (key === 'verification') {
+				data.verification = value.toString();
 			} // else?
 		}
 
@@ -135,6 +139,13 @@
 			</p>
 		{:else}
 			<p>Please answer the following questions so we can best pair you with suitable students.</p>
+
+			<div class="divider" />
+
+			<div class="form-section">
+				<input type="text" name="verification" placeholder="Verification code" required />
+				<a href="/become-a-tutor/code">Didn't get a code?</a>
+			</div>
 
 			<div class="divider" />
 
