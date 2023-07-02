@@ -213,6 +213,7 @@
 		padding: 0.75rem;
 		background-color: var(--light-blue);
 		border-radius: 5%;
+		transition: all 200ms;
 	}
 
 	.timeslot-checkbox:checked + label.timeslot-option {
