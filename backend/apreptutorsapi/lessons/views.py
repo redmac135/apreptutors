@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.views import APIView
 from .models import *
 from .serializers import *
@@ -46,8 +45,10 @@ class UserTypeAPI(APIView):
 
     permission_classes = [FirebaseAuthentication]
 
-    def get(self, request, pk):
-        user: Profile = self.model_class.objects.get(pk=pk)
+    def get(self, request):
+        user = self.authentication_classes[0].authenticate(
+            FirebaseAuthentication(), request
+        )[0]
         response = {
             "is_student": user.is_student,
             "is_teacher": user.is_teacher,
