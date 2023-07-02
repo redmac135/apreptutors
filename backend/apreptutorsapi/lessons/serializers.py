@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Qualification, Timeslot, Location, CanTeachAt, Profile
+from .models import Qualification, Timeslot, Location, CanTeachAt, Profile, Lesson
 
 
 class QualificationSerializer(serializers.ModelSerializer):
@@ -57,4 +57,16 @@ class TimeslotSerializer(serializers.ModelSerializer):
             "weekday",
             "start_time",
             "instructor",
+        ]
+
+
+class LessonSerializer(serializers.ModelSerializer):
+    timeslot = TimeslotSerializer()
+    subject = QualificationSerializer()
+
+    class Meta:
+        model = Lesson
+        fields = [
+            "timeslot",
+            "subject",
         ]

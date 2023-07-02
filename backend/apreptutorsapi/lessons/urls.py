@@ -12,4 +12,10 @@ urlpatterns = [
     ),
     path("qualifications/", QualificationsListAPI.as_view(), name="qualifications-api"),
     path("createtutor/", InstructorSignupAPI.as_view(), name="createtutor-api"),
+    path("usertype/", UserTypeAPI.as_view(), name="usertype-api"),
+    path(
+        "registeredlessons/",
+        RegisteredLessonsAPI.as_view(),
+        name="registeredlessons-api",
+    ),
 ]

@@ -2,13 +2,19 @@
 	import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 	import { get } from 'svelte/store';
 	import firebaseApp from '../store';
+	import { page } from '$app/stores';
 
 	const app = get(firebaseApp);
 
-	const loginWithGoogle = () => {
+	const loginWithGoogle = async () => {
 		// @ts-ignore
 		const auth = getAuth(app);
-		signInWithPopup(auth, new GoogleAuthProvider());
+		await signInWithPopup(auth, new GoogleAuthProvider());
+
+		// redirect to given page
+		const params = $page.url.searchParams;
+		const next = params.get('next');
+		window.location.href = next || '/';
 	};
 </script>
 
@@ -35,8 +41,8 @@
 		width: 24rem;
 		padding: 2rem;
 		margin: 6rem auto;
-        border-radius: 0.3rem;
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+		border-radius: 0.3rem;
+		box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
 	}
 
 	/* logo and welcome text */
@@ -50,8 +56,8 @@
 		font-weight: 500;
 		width: var(--content-width);
 		text-align: center;
-        margin-top: 0.5rem;
-        margin-bottom: 1.5rem;
+		margin-top: 0.5rem;
+		margin-bottom: 1.5rem;
 	}
 
 	/* login button */
@@ -79,7 +85,7 @@
 	/* or text */
 	.or-container {
 		position: relative;
-        margin: 0.5rem 0;
+		margin: 0.5rem 0;
 	}
 
 	.or-text {

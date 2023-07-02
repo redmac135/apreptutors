@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.views import APIView
 from .models import *
 from .serializers import *
@@ -18,7 +17,7 @@ class InstructorAPI(APIView):
     def get(self, request, pk):
         timeslot = self.model_class.objects.get(pk=pk)
         serializer = self.serializer_class(timeslot)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class QualificationsListAPI(APIView):
@@ -28,7 +27,7 @@ class QualificationsListAPI(APIView):
     def get(self, request):
         qualifications = self.model_class.objects.all()
         serializer = self.serializer_class(qualifications, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class LocationsListAPI(APIView):
@@ -38,17 +37,23 @@ class LocationsListAPI(APIView):
     def get(self, request):
         locations = self.model_class.objects.all()
         serializer = self.serializer_class(locations, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-# class UserTypeAPI(APIView):
-#     model_class = Profile
+class UserTypeAPI(APIView):
+    model_class = Profile
 
-#     def get(self, request, pk):
-#         user = self.model_class.objects.get(pk=pk)
-#         response = {
-#             "type":
-#         }
+    permission_classes = [FirebaseAuthentication]
+
+    def get(self, request):
+        user = self.authentication_classes[0].authenticate(
+            FirebaseAuthentication(), request
+        )[0]
+        response = {
+            "is_student": user.is_student,
+            "is_teacher": user.is_teacher,
+        }
+        return Response(response, status=status.HTTP_200_OK)
 
 
 class TimeslotAPI(APIView):
@@ -58,7 +63,7 @@ class TimeslotAPI(APIView):
     def get(self, request, pk):
         timeslot = self.model_class.objects.get(pk=pk)
         serializer = self.serializer_class(timeslot)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class TimeslotsListAPI(APIView):
@@ -67,10 +72,11 @@ class TimeslotsListAPI(APIView):
 
     def get(self, request, qualification_pk):
         timeslots = self.model_class.objects.filter(
-            instructor__instructorqualification_set__qualification__pk=qualification_pk
+            instructor__instructorqualification_set__qualification__pk=qualification_pk,
+            is_available=True,
         )
         serializer = self.serializer_class(timeslots, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class InstructorSignupAPI(APIView):
@@ -85,12 +91,14 @@ class InstructorSignupAPI(APIView):
         # Ensure form only filled out once
         if user.is_teacher:
             raise PermissionError("You may only fill this out ONCE")
-        
+
         # Check that Verification code works
         verification_code = data["verification"]
         correct_code = str(hashlib.md5(user.email.encode()).hexdigest())
         if not verification_code == correct_code:
-            return Response({"reponse": "Invalid verification code."}, status=status.HTTP_200_OK)
+            return Response(
+                {"reponse": "Invalid verification code."}, status=status.HTTP_200_OK
+            )
 
         user.set_teacher(True)
 
@@ -142,4 +150,20 @@ class InstructorSignupAPI(APIView):
                 weekday=Timeslot.SATURDAY, start_time=time, instructor=user
             )
 
-        return Response({"response": "Instructor profile created."}, status=status.HTTP_200_OK)
+        return Response(
+            {"response": "Instructor profile created."}, status=status.HTTP_200_OK
+        )
+
+
+class RegisteredLessonsAPI(APIView):
+    model_class = Lesson
+    serializer_class = LessonSerializer
+    authentication_classes = [FirebaseAuthentication]
+
+    def get(self, request):
+        user: Profile = self.authentication_classes[0].authenticate(
+            FirebaseAuthentication(), request
+        )[0]
+        lessons = self.model_class.objects.filter(student__uid=user.uid)
+        serializer = self.serializer_class(lessons, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
