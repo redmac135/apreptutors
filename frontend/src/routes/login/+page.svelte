@@ -1,27 +1,21 @@
 <script lang="ts">
-	import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
-	import { get } from 'svelte/store';
-	import firebaseApp from '../store';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { loginWithGoogle } from '$lib/auth';
 
-	const app = get(firebaseApp);
-
-	const loginWithGoogle = async () => {
-		// @ts-ignore
-		const auth = getAuth(app);
-		await signInWithPopup(auth, new GoogleAuthProvider());
-
-		// redirect to given page
-		const params = $page.url.searchParams;
-		const next = params.get('next');
-		window.location.href = next || '/';
-	};
+	function loginRedirect() {
+		loginWithGoogle().then(() => {
+			const params = $page.params;
+			const next = params.next || '/';
+			goto(next);
+		})
+	}
 </script>
 
 <div class="container">
 	<img class="logo" src="images/logos/logo1.png" alt="aprep tutors logo" />
 	<h1>Good to see you again!</h1>
-	<button class="login-google" on:click={loginWithGoogle}>Login with Google</button>
+	<button class="login-google" on:click={loginRedirect}>Login with Google</button>
 	<div class="or-container">
 		<span class="or-text">or</span>
 	</div>
