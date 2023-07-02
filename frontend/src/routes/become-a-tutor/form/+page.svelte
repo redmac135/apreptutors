@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+	import { getAuth } from 'firebase/auth';
 	import { get } from 'svelte/store';
 	import firebaseApp from '../../store';
 	import { apiUrl } from '$lib/api';
@@ -8,18 +8,8 @@
 	export let data: any;
 	const { subjects, locations } = data;
 
-	const app = get(firebaseApp);
-	// @ts-ignore
-	const auth = getAuth(app);
-	$: loggedIn = auth.currentUser ? true : false;
-
-	const loginWithGoogle = () => {
-		// @ts-ignore
-		const auth = getAuth(app);
-		signInWithPopup(auth, new GoogleAuthProvider());
-	};
-
 	const checkLoggedIn = () => {
+		const app = get(firebaseApp);
 		// @ts-ignore
 		const auth = getAuth(app);
 		if (auth.currentUser) {
@@ -131,11 +121,13 @@
 </script>
 
 <div class="container">
-	<form action={apiUrl("/createtutor/")} on:submit|preventDefault={handleSubmit}>
+	<form action={apiUrl('/createtutor/')} on:submit|preventDefault={handleSubmit}>
 		<h1>Sign up to tutor with aPrep Tutors</h1>
-		{#if !loggedIn}
+		{#if !checkLoggedIn()}
 			<p class="warning">
-				You are not logged in. Please <a class="login" href="/login">log in</a> before continuing.
+				You are not logged in. Please <a class="login" href="/login?next=become-a-tutor/form"
+					>log in</a
+				> before continuing.
 			</p>
 		{:else}
 			<p>Please answer the following questions so we can best pair you with suitable students.</p>
