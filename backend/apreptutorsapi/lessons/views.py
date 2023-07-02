@@ -167,3 +167,28 @@ class RegisteredLessonsAPI(APIView):
         lessons = self.model_class.objects.filter(student__uid=user.uid)
         serializer = self.serializer_class(lessons, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class RegisterLessonAPI(APIView):
+    model_class = Lesson
+    authentication_classes = [FirebaseAuthentication]
+
+    def post(self, request):
+        data = json.loads(request.body)
+        user: Profile = self.authentication_classes[0].authenticate(
+            FirebaseAuthentication(), request
+        )[0]
+
+        data = {"timeslots": [0, 1], "subject": 3, "location": 4}
+
+        if not len(data["timeslots"]) == 2:
+            raise ValueError("Only 2 Timeslots Allowed")
+        for timeslot in data["timeslots"]:
+            self.model_class.create_lesson(
+                timeslot=Timeslot.objects.get(pk=timeslot),
+                student=user,
+                location=Location.objects.get(pk=data["location"]),
+                subject=Qualification.objects.get(pk=data["subject"]),
+            )
+
+        return Response(status=status.HTTP_200_OK)
