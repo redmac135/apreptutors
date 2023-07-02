@@ -1,23 +1,11 @@
 <script lang="ts">
-	import { getAuth } from 'firebase/auth';
-	import { get } from 'svelte/store';
-	import firebaseApp from '../../store';
 	import { apiUrl } from '$lib/api';
+	import { goto } from '$app/navigation';
+	import { firebaseUser } from '../../store';
 
 	// from +page.ts
 	export let data: any;
 	const { subjects, locations } = data;
-
-	const checkLoggedIn = () => {
-		return true; // REMOVE
-		const app = get(firebaseApp);
-		// @ts-ignore
-		const auth = getAuth(app);
-		if (auth.currentUser) {
-			return true;
-		}
-		return false;
-	};
 
 	const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 	const timeslots = [
@@ -48,6 +36,7 @@
 	};
 
 	function handleSubmit(e: any) {
+		console.log('UISHFDIUSDHFUSHDOUGHOFU');
 		const ACTION_URL = e.target.action;
 		const FORM_DATA = new FormData(e.target);
 		let data: FormData = {
@@ -90,41 +79,32 @@
 			return;
 		}
 
-		// @ts-ignore
-		const auth = getAuth(app);
-		const user = auth.currentUser;
-		if (!user) {
-			alert('Please log in first.');
-			return;
-		}
-		user.getIdToken().then((token) => {
-			fetch(ACTION_URL, {
-				method: 'POST',
-				body: JSON.stringify(data),
-				headers: {
-					Authorization: token
+		fetch(ACTION_URL, {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: {
+				Authorization: $firebaseUser.token
+			}
+		})
+			.then((res) => {
+				if (res.status === 200) {
+					// TODO: change this redirect to /home
+					goto('/comingsoon');
+				} else {
+					alert('Something went wrong. Please try again.');
 				}
 			})
-				.then((res) => {
-					if (res.status === 200) {
-						// TODO: change this redirect
-						window.location.href = '/comingsoon';
-					} else {
-						alert('Something went wrong. Please try again.');
-					}
-				})
-				.catch((err) => {
-					console.error(err);
-					alert('Something went wrong. Please try again.');
-				});
-		});
+			.catch((err) => {
+				console.error(err);
+				alert('Something went wrong. Please try again.');
+			});
 	}
 </script>
 
 <div class="container">
 	<form action={apiUrl('/createtutor/')} on:submit|preventDefault={handleSubmit}>
 		<h1>Sign up to tutor with aPrep Tutors</h1>
-		{#if !checkLoggedIn()}
+		{#if !$firebaseUser.loggedIn}
 			<p class="warning">
 				You are not logged in. Please <a class="login" href="/login?next=become-a-tutor/form"
 					>log in</a

@@ -1,15 +1,5 @@
 <script lang="ts">
-	import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
-	import { get } from 'svelte/store';
-	import firebaseApp from '../store';
-
-	const app = get(firebaseApp);
-
-	const loginWithGoogle = () => {
-		// @ts-ignore
-		const auth = getAuth(app);
-		signInWithPopup(auth, new GoogleAuthProvider());
-	};
+	import { loginWithGoogle } from '$lib/auth';
 </script>
 
 <div class="container">
@@ -31,8 +21,8 @@
 		width: 24rem;
 		padding: 2rem;
 		margin: 6rem auto;
-        border-radius: 0.3rem;
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+		border-radius: 0.3rem;
+		box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
 	}
 
 	/* logo and welcome text */
@@ -46,8 +36,8 @@
 		font-weight: 500;
 		width: var(--content-width);
 		text-align: center;
-        margin-top: 0.5rem;
-        margin-bottom: 1.5rem;
+		margin-top: 0.5rem;
+		margin-bottom: 1.5rem;
 	}
 
 	/* login button */
