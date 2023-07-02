@@ -145,3 +145,17 @@ class InstructorSignupAPI(APIView):
             )
 
         return Response({"response": "Instructor profile created."}, status=status.HTTP_200_OK)
+
+
+class RegisteredLessonsAPI(APIView):
+    model_class = Lesson
+    serializer_class = LessonSerializer
+    authentication_classes = [FirebaseAuthentication]
+
+    def get(self, request):
+        user: Profile = self.authentication_classes[0].authenticate(
+            FirebaseAuthentication(), request
+        )[0]
+        lessons = self.model_class.objects.filter(student__uid=user.uid)
+        serializer = self.serializer_class(lessons, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
