@@ -48,12 +48,41 @@ class InstructorSerializer(serializers.ModelSerializer):
         ]
 
 
+class LocationIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Location
+        fields = ["pk"]
+
+
+class SimpleCanTeachAtSerializer(serializers.ModelSerializer):
+    location = LocationIdSerializer()
+
+    class Meta:
+        model = CanTeachAt
+        fields = [
+            "pk",
+            "location",
+        ]
+
+
+class SimpleInstructorSerializer(serializers.ModelSerializer):
+    canteachat_set = SimpleCanTeachAtSerializer()
+
+    class Meta:
+        model = Profile
+        fields = [
+            "pk",
+            "canteachat_set",
+        ]
+
+
 class TimeslotSerializer(serializers.ModelSerializer):
-    instructor = InstructorSerializer()
+    instructor = SimpleInstructorSerializer()
 
     class Meta:
         model = Timeslot
         fields = [
+            "pk",
             "weekday",
             "start_time",
             "instructor",
