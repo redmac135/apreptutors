@@ -66,7 +66,7 @@ class TimeslotAPI(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class TimeslotsListAPI(APIView):
+class TimeslotsListBySubjectAPI(APIView):
     model_class = Timeslot
     serializer_class = TimeslotSerializer
 
@@ -77,6 +77,27 @@ class TimeslotsListAPI(APIView):
         )
         serializer = self.serializer_class(timeslots, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class TimeslotsListAPI(APIView):
+    model_class = Timeslot
+    serializer_class = TimeslotSerializer
+
+    def get(self, request):
+        response = []
+        subjects = Qualification.objects.all()
+        for subject in subjects:
+            valid_timeslots = self.model_class.objects.filter(
+                instructor__instructorqualification_set__qualification=subject,
+                is_available=True,
+            )
+            response.append(
+                {
+                    "subjectId": subject.pk,
+                    "timeslots": self.serializer_class(valid_timeslots, many=True),
+                }
+            )
+        return Response({"data": response}, status=status.HTTP_200_OK)
 
 
 class InstructorSignupAPI(APIView):
@@ -167,3 +188,26 @@ class RegisteredLessonsAPI(APIView):
         lessons = self.model_class.objects.filter(student__uid=user.uid)
         serializer = self.serializer_class(lessons, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class RegisterLessonAPI(APIView):
+    model_class = Lesson
+    authentication_classes = [FirebaseAuthentication]
+
+    def post(self, request):
+        data = json.loads(request.body)
+        user: Profile = self.authentication_classes[0].authenticate(
+            FirebaseAuthentication(), request
+        )[0]
+
+        if not len(data["timeslots"]) == 2:
+            raise ValueError("Only 2 Timeslots Allowed")
+        for timeslot in data["timeslots"]:
+            self.model_class.create_lesson(
+                timeslot=Timeslot.objects.get(pk=timeslot),
+                student=user,
+                location=Location.objects.get(pk=data["location"]),
+                subject=Qualification.objects.get(pk=data["subject"]),
+            )
+
+        return Response(status=status.HTTP_200_OK)
