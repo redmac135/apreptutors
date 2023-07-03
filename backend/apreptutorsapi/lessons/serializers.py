@@ -66,7 +66,7 @@ class SimpleCanTeachAtSerializer(serializers.ModelSerializer):
 
 
 class SimpleInstructorSerializer(serializers.ModelSerializer):
-    canteachat_set = LocationIdSerializer()
+    canteachat_set = SimpleCanTeachAtSerializer()
 
     class Meta:
         model = Profile
