@@ -8,7 +8,7 @@ export type UserProfile = {
     loggedIn: boolean;
     token: string;
     displayName: string;
-    photoUrl: string;
+    photoUrl: string | null;
 }
 export const firebaseUser: Writable<UserProfile> = persisted("firebaseUser", {
     loggedIn: false,
