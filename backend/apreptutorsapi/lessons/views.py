@@ -94,7 +94,7 @@ class TimeslotsListAPI(APIView):
             response.append(
                 {
                     "subjectId": subject.pk,
-                    "timeslots": self.serializer_class(valid_timeslots, many=True),
+                    "timeslots": self.serializer_class(valid_timeslots, many=True).data,
                 }
             )
         return Response({"data": response}, status=status.HTTP_200_OK)
