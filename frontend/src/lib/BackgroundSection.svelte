@@ -18,8 +18,7 @@
 			<img src="images/universities/waterloocrest.png" alt="waterloo university crest" class="waterloo-crest" />
 			<img src="images/universities/mcmastercrest.png" alt="mcmaster university crest" class="mcmaster-crest" />
 		</div>
-		<!-- TODO update anchor -->
-		<button><a href="/our-story">Learn more about our tutors</a></button>
+		<a href="/our-story"><button>Learn more about our tutors</button></a>
 	</div>
 </div>
 
@@ -89,16 +88,13 @@
 		margin: 2rem 0;
 		cursor: pointer;
 		transition: all 0.2s ease-in-out;
+		color: var(--white);
+		text-decoration: none;
+		font-size: 1rem;
 	}
 
 	button:hover {
 		background-color: var(--light-blue);
-	}
-
-	button a {
-		color: var(--white);
-		text-decoration: none;
-		font-size: 1rem;
 	}
 
 	@media (min-width: 600px) {

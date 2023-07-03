@@ -37,7 +37,7 @@
 			<span>&nbsp;IB students</span>
 		</h1>
 		<!-- TODO ANCHORs -->
-		<button><a href="/#">Learn More</a></button>
+		<a href="/#aboutus"><button>Learn More</button></a>
 	</div>
 </section>
 
@@ -81,16 +81,13 @@
 		margin: 2rem 0;
 		cursor: pointer;
 		transition: all 0.2s ease-in-out;
+		color: var(--white);
+		text-decoration: none;
+		font-size: 1rem;
 	}
 
 	button:hover {
 		background-color: var(--light-blue);
-	}
-
-	button a {
-		color: var(--white);
-		text-decoration: none;
-		font-size: 1rem;
 	}
 
 	.slogan {
