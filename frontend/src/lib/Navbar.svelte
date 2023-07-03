@@ -15,11 +15,16 @@
 		<li>
 			<a on:click={close} class="logo" href="/#">aPrep Tutors</a>
 		</li>
-		<button class="burger" on:click={toggle} class:open>
-			<div />
-			<div />
-			<div />
-		</button>
+		<div class="burger-wrapper">
+			<button class="burger" on:click={toggle} class:open>
+				<div />
+				<div />
+				<div />
+			</button>
+			{#if $firebaseUser.photoUrl}
+				<img class="mobile-profile-pic" src={$firebaseUser.photoUrl} alt="user profile" />
+			{/if}
+		</div>
 	</ul>
 	<ul class="nav-right" class:nav-open={open}>
 		<li class="link"><a on:click={close} href="/#aboutus">About us</a></li>
@@ -161,7 +166,29 @@
 		margin-left: 1rem;
 	}
 
-	@media (min-width: 600px) {
+	.mobile-profile-pic {
+		display: inline;
+		width: 2rem;
+		height: 2rem;
+		border-radius: 50%;
+		margin-left: 1rem;
+	}
+
+	.burger-wrapper {
+		display: flex;
+		align-items: center;
+		margin-right: 0.5rem;
+	}
+
+	@media (min-width: 700px) {
+		.profile-pic {
+			display: inline;
+		}
+
+		.mobile-profile-pic {
+			display: none;
+		}
+
 		nav {
 			display: flex;
 		}

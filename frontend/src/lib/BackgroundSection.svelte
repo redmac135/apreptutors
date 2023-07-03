@@ -9,14 +9,38 @@
 			school.
 		</p>
 		<div class="uni-logo-container">
-			<img src="images/universities/western.png" alt="western university logo" class="western-logo" />
-			<img src="images/universities/waterloo.png" alt="waterloo university logo" class="waterloo-logo" />
-			<img src="images/universities/mcmaster.png" alt="mcmaster university logo" class="mcmaster-logo" />
+			<img
+				src="images/universities/western.png"
+				alt="western university logo"
+				class="western-logo"
+			/>
+			<img
+				src="images/universities/waterloo.png"
+				alt="waterloo university logo"
+				class="waterloo-logo"
+			/>
+			<img
+				src="images/universities/mcmaster.png"
+				alt="mcmaster university logo"
+				class="mcmaster-logo"
+			/>
 		</div>
 		<div class="uni-crest-container">
-			<img src="images/universities/westerncrest.png" alt="western university crest" class="western-crest" />
-			<img src="images/universities/waterloocrest.png" alt="waterloo university crest" class="waterloo-crest" />
-			<img src="images/universities/mcmastercrest.png" alt="mcmaster university crest" class="mcmaster-crest" />
+			<img
+				src="images/universities/westerncrest.png"
+				alt="western university crest"
+				class="western-crest"
+			/>
+			<img
+				src="images/universities/waterloocrest.png"
+				alt="waterloo university crest"
+				class="waterloo-crest"
+			/>
+			<img
+				src="images/universities/mcmastercrest.png"
+				alt="mcmaster university crest"
+				class="mcmaster-crest"
+			/>
 		</div>
 		<a href="/our-story"><button>Learn more about our tutors</button></a>
 	</div>
@@ -60,7 +84,7 @@
 	}
 
 	.uni-crest-container {
-		width: 30rem;
+		width: 22rem;
 		display: flex;
 		justify-content: space-evenly;
 		margin: 2.5rem 0;
@@ -98,6 +122,10 @@
 	}
 
 	@media (min-width: 600px) {
+		.uni-crest-container {
+			width: 30rem;
+		}
+
 		.uni-crest-container img {
 			height: 8rem;
 		}
@@ -110,6 +138,10 @@
 	@media (min-width: 900px) {
 		.container {
 			width: 100%;
+		}
+
+		.uni-crest-container {
+			width: 45rem;
 		}
 
 		.description {
