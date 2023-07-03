@@ -66,7 +66,7 @@ class SimpleInstructorSerializer(serializers.ModelSerializer):
 
 
 class TimeslotSerializer(serializers.ModelSerializer):
-    instructor = InstructorSerializer()
+    instructor = SimpleInstructorSerializer()
 
     class Meta:
         model = Timeslot
