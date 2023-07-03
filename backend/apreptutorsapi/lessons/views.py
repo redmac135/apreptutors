@@ -91,13 +91,18 @@ class TimeslotsListAPI(APIView):
                 instructor__instructorqualification_set__qualification=subject,
                 is_available=True,
             )
+            data = self.serializer_class(valid_timeslots, many=True).data
+            location_ids = []
+            for location in data["instructor"].pop("canteachat_set"):
+                location_ids.append(location["location"]["pk"])
+            data["locations"] = location_ids
             response.append(
                 {
                     "subjectId": subject.pk,
-                    "timeslots": self.serializer_class(valid_timeslots, many=True).data,
+                    "timeslots": data,
                 }
             )
-        return Response({"data": response}, status=status.HTTP_200_OK)
+        return Response(response, status=status.HTTP_200_OK)
 
 
 class InstructorSignupAPI(APIView):
