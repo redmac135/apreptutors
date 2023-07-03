@@ -93,9 +93,10 @@ class TimeslotsListAPI(APIView):
             )
             data = self.serializer_class(valid_timeslots, many=True).data
             location_ids = []
-            for location in data["instructor"].pop("canteachat_set"):
-                location_ids.append(location["location"]["pk"])
-            data["locations"] = location_ids
+            for timeslot in data:
+                for location in timeslot["instructor"].pop("canteachat_set"):
+                    location_ids.append(location["location"]["pk"])
+                timeslot["locations"] = location_ids
             response.append(
                 {
                     "subjectId": subject.pk,
