@@ -51,7 +51,9 @@ class InstructorSerializer(serializers.ModelSerializer):
 class LocationIdSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ["pk"]
+        fields = [
+            "pk",
+        ]
 
 
 class SimpleCanTeachAtSerializer(serializers.ModelSerializer):
