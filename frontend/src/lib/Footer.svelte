@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { firebaseUser } from '../routes/store';
+
 	const YEAR = new Date().getFullYear();
 </script>
 
@@ -37,7 +39,9 @@
 		<div class="col-2">
 			<h2>Support</h2>
 			<ul>
-				<li><a href="/login">Login</a></li>
+				{#if !$firebaseUser.loggedIn}
+					<li><a href="/login">Login</a></li>
+				{/if}
 				<li><a href="/become-a-tutor">Become a tutor</a></li>
 			</ul>
 		</div>

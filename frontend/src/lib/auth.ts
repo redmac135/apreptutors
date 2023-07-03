@@ -12,7 +12,7 @@ export async function loginWithGoogle() {
             loggedIn: true,
             token: await user.getIdToken(),
             displayName: user.displayName ?? "",
-            photoUrl: user.photoURL ?? ""
+            photoUrl: user.photoURL
         };
         firebaseUser.set(profile);
         console.log("login successful");
