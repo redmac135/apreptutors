@@ -15,8 +15,9 @@ urlpatterns = [
     path("createtutor/", InstructorSignupAPI.as_view(), name="createtutor-api"),
     path("usertype/", UserTypeAPI.as_view(), name="usertype-api"),
     path(
-        "registeredlessons/",
+        "registeredlessons/<str:type>",
         RegisteredLessonsAPI.as_view(),
         name="registeredlessons-api",
     ),
+    path("createlesson/", CreateLessonAPI.as_view(), name="createlesson-api"),
 ]
