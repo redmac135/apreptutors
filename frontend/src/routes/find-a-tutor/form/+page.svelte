@@ -203,7 +203,7 @@
 </script>
 
 <form action={apiUrl('/createlesson/')} on:submit|preventDefault={handleSubmit}>
-	<h1>find a ttuuuutor</h1>
+	<h1>Find a Tutor</h1>
 	{#if !$firebaseUser.loggedIn}
 		<p class="warning">
 			You are not logged in. Please <a class="login" href="/login?next=become-a-tutor/form"
@@ -211,10 +211,10 @@
 			> before continuing.
 		</p>
 	{:else}
-		<p>answer deez questions</p>
+		<p>To register for your first FREE TRIAL lesson at the library closest to you, please enter your desired subject and library location. This information will allow us to automatically match you to one of our experienced IB tutors!</p>
 
 		<div class="form-section">
-			<h2>subject</h2>
+			<h2>What do you want to learn?</h2>
 			<select name="subject" id="subject" bind:value={selectedSubject} on:change={updateBySubject}>
 				<option value={-1}>Select a subject</option>
 				{#each subjects as { pk, name, type }}
@@ -226,7 +226,7 @@
 		<div class="divider" />
 
 		<div class="form-section">
-			<h2>location</h2>
+			<h2>Where should we meet?</h2>
 			<select
 				name="location"
 				id="location"
@@ -243,8 +243,8 @@
 		<div class="divider" />
 
 		<div class="form-section">
-			<h2>pick a time</h2>
-			<p>select {MAX_SELECTION} time</p>
+			<h2>Pick a time</h2>
+			<p>When selecting times in the areas listed below, <strong>choose ONLY 1 timeslot for weekly lessons or 2 timeslots for twice-weekly lessons</strong>. 1 class a week will allow students to slowly learn the course throughout the summer while 2 classes a week will allow students the opportunity to learn the entire IB course in the span of the summer. The time slots are coloured RED for unavailable and BLUE for available times.</p>
 			<table id="time-selection">
 				<tr>
 					<th />
