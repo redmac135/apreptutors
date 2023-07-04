@@ -128,6 +128,7 @@ class InstructorSignupAPI(APIView):
             )
 
         user.set_teacher(True)
+        user.save()
 
         # Create Instructor Qualifications
         for subject_pk in data["subjects"]:
