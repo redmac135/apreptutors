@@ -9,7 +9,7 @@ class Profile(models.Model):
     email = models.EmailField(max_length=256)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now_add=True, null=True)
-    is_student = models.BooleanField(default=False)
+    is_student = models.BooleanField(default=True)
     is_teacher = models.BooleanField(default=False)
 
     objects = ProfileManager()
