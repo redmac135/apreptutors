@@ -217,11 +217,21 @@ class CreateLessonAPI(APIView):
             FirebaseAuthentication(), request
         )[0]
 
-        if not len(data["timeslots"]) in self.ALLOWED_LESSONS_PER_WEEK:
+        lesson_amount = 0
+        for value in data["timeslots"].values():
+            lesson_amount += len(value)
+
+        if not lesson_amount in self.ALLOWED_LESSONS_PER_WEEK:
             raise ValueError("Wrong number of lessons")
         location = Location.objects.get(pk=data["location"])
         subject = Qualification.objects.get(pk=data["subject"])
-        for timeslot in data["timeslots"]:
+        timeslot_criteria = []
+        for weekday_long, time_pk in data["timeslots"].items():
+            weekday = weekday_long[0:3].upper()
+            start_time = Timeslot.ALLOWED_TIMES[time_pk][0]
+            timeslot_criteria.append((weekday, start_time))
+        timeslots = Timeslot.find_timeslots(timeslot_criteria, subject, location)
+        for timeslot in timeslots:
             self.model_class.create_lesson(
                 timeslot=Timeslot.objects.get(pk=timeslot),
                 student=user,
