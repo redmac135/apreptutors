@@ -6,6 +6,7 @@
 
 	export let data: any;
 	const { subjects, locations, subjectTimeslots } = data;
+	const num_students_options = [1,3,4]
 
 	const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 	const timeslots = [
@@ -58,6 +59,7 @@
 	const MAX_SELECTION = 2;
 	let selectedSubject = -1;
 	let selectedLocation = -1;
+	let num_students = -1
 
 	let timeslotAvailable = Array<boolean>(days.length * timeslots.length).fill(false);
 	let checked = new Set<number>();
@@ -146,6 +148,7 @@
 		let data: FormData = {
 			subject: '',
 			location: '',
+			num_students: '',
 			timeslots: {
 				monday: [],
 				tuesday: [],
@@ -163,6 +166,8 @@
 				data.subject = parseInt(value.toString());
 			} else if (key === 'location') {
 				data.location = parseInt(value.toString());
+			} else if (key === 'num_students') {
+				data.num_students = parseInt(value.toString());
 			} else if (key === 'timeslot') {
 				let [day, timeslot] = value.toString().split('-');
 				// @ts-ignore
@@ -174,6 +179,7 @@
 		if (
 			data.subject === '' ||
 			data.location === '' ||
+			data.num_students === '' ||
 			!Object.values(data.timeslots).some((day) => day.length > 0)
 		) {
 			alert('Please fill out all fields.');
@@ -239,6 +245,24 @@
 				{/each}
 			</select>
 		</div>
+
+		<div class="divider" />
+
+		<div class="form-section">
+			<h2>How many students?</h2>
+			<p>If you are registering for a GROUP, please indicate the number of students you wish to enroll. Please note that only ONE person from your group is registering for your session. Group lessons are $20/hour while individual 1-on-1 lessons are $50/hour.</p>
+			<select
+				name="num_students"
+				id="num_students"
+				bind:value={num_students}
+			>
+				<option value={-1}>Select number of students</option>
+				{#each num_students_options as num}
+					<option value={num}>{num}</option>
+				{/each}
+			</select>
+		</div>
+
 
 		<div class="divider" />
 

@@ -239,6 +239,7 @@ class CreateLessonAPI(APIView):
                 student=user,
                 location=location,
                 subject=subject,
+                num_students=int(data["num_students"]),
             )
 
         return Response(status=status.HTTP_200_OK)

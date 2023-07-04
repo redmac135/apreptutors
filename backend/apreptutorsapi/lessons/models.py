@@ -177,13 +177,14 @@ class Lesson(models.Model):
     student = models.ForeignKey(Profile, null=True, on_delete=models.SET_NULL)
     location = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
     subject = models.ForeignKey(Qualification, null=True, on_delete=models.SET_NULL)
+    num_students = models.IntegerField(default=1)
 
     def __str__(self) -> str:
         return str(self.subject) + " " + str(self.timeslot) + " " + str(self.student)
 
     @classmethod
     def create_lesson(
-        cls, timeslot: Timeslot, student: Profile, subject: Qualification, location: Location
+        cls, timeslot: Timeslot, student: Profile, subject: Qualification, location: Location, num_students: int
     ):
         if not student.is_student:
             raise PermissionError("Not Student")
@@ -191,7 +192,7 @@ class Lesson(models.Model):
         if not subject.check_qualified(instructor):
             raise PermissionError("Not Qualified")
         obj = cls.objects.get_or_create(
-            timeslot=timeslot, student=student, subject=subject, location=location
+            timeslot=timeslot, student=student, subject=subject, location=location, num_students=num_students
         )
         timeslot.set_unavailable()
         return obj
