@@ -144,8 +144,8 @@
 		const ACTION_URL = e.target.action;
 		const FORM_DATA = new FormData(e.target);
 		let data: FormData = {
-			subject: "",
-			location: "",
+			subject: '',
+			location: '',
 			timeslots: {
 				monday: [],
 				tuesday: [],
@@ -158,7 +158,6 @@
 		};
 
 		for (const field of FORM_DATA) {
-			console.log(field)
 			let [key, value] = field;
 			if (key === 'subject') {
 				data.subject = parseInt(value.toString());
@@ -173,15 +172,13 @@
 
 		// check if any fields are empty
 		if (
-			data.subject === "" ||
-			data.location === "" ||
+			data.subject === '' ||
+			data.location === '' ||
 			!Object.values(data.timeslots).some((day) => day.length > 0)
 		) {
 			alert('Please fill out all fields.');
 			return;
 		}
-
-		console.log(data);
 
 		fetch(ACTION_URL, {
 			method: 'POST',
@@ -218,12 +215,7 @@
 
 		<div class="form-section">
 			<h2>subject</h2>
-			<select
-				name="subject"
-				id="subject"
-				bind:value={selectedSubject}
-				on:change={updateBySubject}
-			>
+			<select name="subject" id="subject" bind:value={selectedSubject} on:change={updateBySubject}>
 				<option value={-1}>Select a subject</option>
 				{#each subjects as { pk, name, type }}
 					<option value={pk}>{`${name} ${type}`}</option>
