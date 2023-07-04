@@ -43,7 +43,7 @@ class LocationsListAPI(APIView):
 class UserTypeAPI(APIView):
     model_class = Profile
 
-    permission_classes = [FirebaseAuthentication]
+    authentication_classes = [FirebaseAuthentication]
 
     def get(self, request):
         user = self.authentication_classes[0].authenticate(
