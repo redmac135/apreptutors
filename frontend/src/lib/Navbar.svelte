@@ -36,7 +36,7 @@
 		{/if}
 		<!-- <li class="link"><a on:click={close} href="/comingsoon">中文</a></li> -->
 		<!-- todo: change href to find-a-tutor -->
-		<li><a on:click={close} href="/comingsoon"><button class="button">Find a Tutor</button></a></li>
+		<li><a on:click={close} href="/find-a-tutor"><button class="button">Find a Tutor</button></a></li>
 		{#if $firebaseUser.photoUrl}
 			<img class="profile-pic" src={$firebaseUser.photoUrl} alt="user profile" />
 		{/if}

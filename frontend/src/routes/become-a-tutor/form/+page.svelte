@@ -36,7 +36,6 @@
 	};
 
 	function handleSubmit(e: any) {
-		console.log('UISHFDIUSDHFUSHDOUGHOFU');
 		const ACTION_URL = e.target.action;
 		const FORM_DATA = new FormData(e.target);
 		let data: FormData = {

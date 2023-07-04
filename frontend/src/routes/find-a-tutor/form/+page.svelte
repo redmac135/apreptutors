@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { SubjectTimeslot, Timeslot } from '$lib/types';
 	import { firebaseUser } from '../../store';
+	import { apiUrl } from '$lib/api';
+	import { goto } from '$app/navigation';
 
 	export let data: any;
 	const { subjects, locations, subjectTimeslots } = data;
@@ -137,9 +139,73 @@
 		}
 		updateFromSelectedInstructors();
 	}
+
+	function handleSubmit(e: any) {
+		const ACTION_URL = e.target.action;
+		const FORM_DATA = new FormData(e.target);
+		let data: FormData = {
+			subject: "",
+			location: "",
+			timeslots: {
+				monday: [],
+				tuesday: [],
+				wednesday: [],
+				thursday: [],
+				friday: [],
+				saturday: [],
+				sunday: []
+			}
+		};
+
+		for (const field of FORM_DATA) {
+			console.log(field)
+			let [key, value] = field;
+			if (key === 'subject') {
+				data.subject = parseInt(value.toString());
+			} else if (key === 'location') {
+				data.location = parseInt(value.toString());
+			} else if (key === 'timeslot') {
+				let [day, timeslot] = value.toString().split('-');
+				// @ts-ignore
+				data.timeslots[day.toLowerCase()].push(parseInt(timeslot));
+			}
+		}
+
+		// check if any fields are empty
+		if (
+			data.subject === "" ||
+			data.location === "" ||
+			!Object.values(data.timeslots).some((day) => day.length > 0)
+		) {
+			alert('Please fill out all fields.');
+			return;
+		}
+
+		console.log(data);
+
+		fetch(ACTION_URL, {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: {
+				Authorization: $firebaseUser.token
+			}
+		})
+			.then((res) => {
+				if (res.status === 200) {
+					// TODO: change this redirect to /home
+					goto('/comingsoon');
+				} else {
+					alert('Something went wrong. Please try again.');
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+				alert('Something went wrong. Please try again.');
+			});
+	}
 </script>
 
-<form action="">
+<form action={apiUrl('/createlesson/')} on:submit|preventDefault={handleSubmit}>
 	<h1>find a ttuuuutor</h1>
 	{#if !$firebaseUser.loggedIn}
 		<p class="warning">
@@ -153,8 +219,8 @@
 		<div class="form-section">
 			<h2>subject</h2>
 			<select
-				name="subjects"
-				id="subjects"
+				name="subject"
+				id="subject"
 				bind:value={selectedSubject}
 				on:change={updateBySubject}
 			>
@@ -170,8 +236,8 @@
 		<div class="form-section">
 			<h2>location</h2>
 			<select
-				name="locations"
-				id="locations"
+				name="location"
+				id="location"
 				bind:value={selectedLocation}
 				on:change={updateBySubject}
 			>
