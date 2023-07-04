@@ -1,0 +1,13 @@
+{% autoescape off %}
+Hi {{ user.display_name }},
+
+This email is to confirm your registeration for a {{ lesson.subject }} tutoring session occuring weekly during:
+{% for time in lesson.times %}
+- {{ time }}
+{% endfor %}
+
+if you have any questions, feel free to reply to this email.
+
+Look forward to seeing you then!
+aPrep Tutors
+{% endautoescape %}
