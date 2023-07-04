@@ -5,19 +5,19 @@ export function apiUrl(path: string) {
     return `${API_BASE}${path}`;
 }
 
-export async function getSubjects(): Promise<Subject[]> {
+export async function getSubjects(fetch: Function): Promise<Subject[]> {
     const API_URL = apiUrl("/qualifications");
     const response = await fetch(API_URL);
     return await response.json();
 }
 
-export async function getLocations(): Promise<Location[]> {
+export async function getLocations(fetch: Function): Promise<Location[]> {
     const API_URL = apiUrl("/locations");
     const response = await fetch(API_URL);
     return await response.json();
 }
 
-export async function getAllTimeslots(): Promise<SubjectTimeslot[]> {
+export async function getAllTimeslots(fetch: Function): Promise<SubjectTimeslot[]> {
     const API_URL = apiUrl("/timeslots/all");
     const response = await fetch(API_URL);
     return await response.json();
