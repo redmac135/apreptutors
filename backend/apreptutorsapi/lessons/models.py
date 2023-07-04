@@ -130,7 +130,7 @@ class Timeslot(models.Model):
             raise LookupError("No Valid Timeslots")
     
         # Pick first instructor
-        instructor = reduced_instructors[0]
+        instructor = next(iter(reduced_instructors))
         final_list = []
         for timeslots in possible_timeslots:
             valid_timeslots = [timeslot for timeslot in timeslots if timeslot.instructor == instructor]
