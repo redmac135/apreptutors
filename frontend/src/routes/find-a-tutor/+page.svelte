@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { SubjectTimeslot, Timeslot } from '$lib/types';
+	import { firebaseUser } from '../store';
 
 	export let data: any;
 	const { subjects, locations, subjectTimeslots } = data;
@@ -55,7 +56,6 @@
 	const MAX_SELECTION = 2;
 	let selectedSubject = -1;
 	let selectedLocation = -1;
-	// TODO: uncheck all timeslots when subject/location changes
 
 	let timeslotAvailable = Array<boolean>(days.length * timeslots.length).fill(false);
 	let checked = new Set<number>();
@@ -141,71 +141,84 @@
 
 <form action="">
 	<h1>find a ttuuuutor</h1>
-	<p>answer deez questions</p>
+	{#if !$firebaseUser.loggedIn}
+		<p class="warning">
+			You are not logged in. Please <a class="login" href="/login?next=become-a-tutor/form"
+				>log in</a
+			> before continuing.
+		</p>
+	{:else}
+		<p>answer deez questions</p>
 
-	<div class="form-section">
-		<h2>subject</h2>
-		<select name="subjects" id="subjects" bind:value={selectedSubject} on:change={updateBySubject}>
-			<option value={-1}>Select a subject</option>
-			{#each subjects as { pk, name, type }}
-				<option value={pk}>{`${name} ${type}`}</option>
-			{/each}
-		</select>
-	</div>
-
-	<div class="divider" />
-
-	<div class="form-section">
-		<h2>location</h2>
-		<select
-			name="locations"
-			id="locations"
-			bind:value={selectedLocation}
-			on:change={updateBySubject}
-		>
-			<option value={-1}>Select a location</option>
-			{#each locations as { pk, name, address }}
-				<option value={pk}>{name}</option>
-			{/each}
-		</select>
-	</div>
-
-	<div class="divider" />
-
-	<div class="form-section">
-		<h2>pick a time</h2>
-		<p>select {MAX_SELECTION} time</p>
-		<table id="time-selection">
-			<tr>
-				<th />
-				{#each days as day}
-					<th>{day}</th>
+		<div class="form-section">
+			<h2>subject</h2>
+			<select
+				name="subjects"
+				id="subjects"
+				bind:value={selectedSubject}
+				on:change={updateBySubject}
+			>
+				<option value={-1}>Select a subject</option>
+				{#each subjects as { pk, name, type }}
+					<option value={pk}>{`${name} ${type}`}</option>
 				{/each}
-			</tr>
-			{#each timeslots as tslot, t}
+			</select>
+		</div>
+
+		<div class="divider" />
+
+		<div class="form-section">
+			<h2>location</h2>
+			<select
+				name="locations"
+				id="locations"
+				bind:value={selectedLocation}
+				on:change={updateBySubject}
+			>
+				<option value={-1}>Select a location</option>
+				{#each locations as { pk, name, address }}
+					<option value={pk}>{name}</option>
+				{/each}
+			</select>
+		</div>
+
+		<div class="divider" />
+
+		<div class="form-section">
+			<h2>pick a time</h2>
+			<p>select {MAX_SELECTION} time</p>
+			<table id="time-selection">
 				<tr>
-					<th>{tslot}</th>
-					{#each days as day, d}
-						<td>
-							<input
-								disabled={!timeslotAvailable[t * days.length + d]}
-								type="checkbox"
-								name="timeslot"
-								class="timeslot-checkbox"
-								value={`${day}-${t}`}
-								id={`timeslot-${t * days.length + d}`}
-								on:change={updateByInstructor}
-								bind:checked={timeslotChecked[t * days.length + d]}
-							/>
-							<label for={`timeslot-${t * days.length + d}`} class="timeslot-option" />
-						</td>
+					<th />
+					{#each days as day}
+						<th>{day}</th>
 					{/each}
 				</tr>
-			{/each}
-		</table>
-	</div>
+				{#each timeslots as tslot, t}
+					<tr>
+						<th>{tslot}</th>
+						{#each days as day, d}
+							<td>
+								<input
+									disabled={!timeslotAvailable[t * days.length + d]}
+									type="checkbox"
+									name="timeslot"
+									class="timeslot-checkbox"
+									value={`${day}-${t}`}
+									id={`timeslot-${t * days.length + d}`}
+									on:change={updateByInstructor}
+									bind:checked={timeslotChecked[t * days.length + d]}
+								/>
+								<label for={`timeslot-${t * days.length + d}`} class="timeslot-option" />
+							</td>
+						{/each}
+					</tr>
+				{/each}
+			</table>
+		</div>
 
-	<input type="submit" value="Submit" />
+		<input type="submit" value="Submit" />
+	{/if}
 </form>
 
 <style>
@@ -256,5 +269,4 @@
 		padding: 0.25rem;
 		text-align: center;
 	}
-
 </style>
