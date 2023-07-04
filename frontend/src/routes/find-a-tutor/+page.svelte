@@ -148,7 +148,7 @@
 		<select name="subjects" id="subjects" bind:value={selectedSubject} on:change={updateBySubject}>
 			<option value={-1}>Select a subject</option>
 			{#each subjects as { pk, name, type }}
-				<option value={pk}>{`${pk} ${type}`}</option>
+				<option value={pk}>{`${name} ${type}`}</option>
 			{/each}
 		</select>
 	</div>
@@ -165,7 +165,7 @@
 		>
 			<option value={-1}>Select a location</option>
 			{#each locations as { pk, name, address }}
-				<option value={pk}>{pk}</option>
+				<option value={pk}>{name}</option>
 			{/each}
 		</select>
 	</div>
