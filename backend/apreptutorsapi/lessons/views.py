@@ -234,7 +234,7 @@ class CreateLessonAPI(APIView):
         timeslots = Timeslot.find_timeslots(timeslot_criteria, subject, location)
         for timeslot in timeslots:
             self.model_class.create_lesson(
-                timeslot=Timeslot.objects.get(pk=timeslot),
+                timeslot=timeslot,
                 student=user,
                 location=location,
                 subject=subject,
