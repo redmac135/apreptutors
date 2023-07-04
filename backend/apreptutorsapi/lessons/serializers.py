@@ -91,13 +91,40 @@ class TimeslotSerializer(serializers.ModelSerializer):
         ]
 
 
+# Serializers for home page Lessons
+class InstructorInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = [
+            "pk",
+            "display_name",
+            "email",
+        ]
+
+class LocationInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Location
+        fields = [
+            "pk",
+            "name",
+            "address",
+        ]
+
+
+class LessonTimeslotSerializer(TimeslotSerializer):
+    instructor = InstructorInfoSerializer()
+
+
 class LessonSerializer(serializers.ModelSerializer):
     timeslot = TimeslotSerializer()
     subject = QualificationSerializer()
+    location = LocationInfoSerializer()
 
     class Meta:
         model = Lesson
         fields = [
             "timeslot",
             "subject",
+            "student",
+            "location",
         ]
