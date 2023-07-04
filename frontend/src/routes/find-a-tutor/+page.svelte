@@ -222,10 +222,84 @@
 </form>
 
 <style>
+	form {
+		background-color: var(--beige);
+		padding: 1.5rem;
+		margin: 2rem;
+		border-radius: 0.3rem;
+		box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+	}
+
+	.timeslot-option {
+		display: block;
+		height: 100%;
+		width: 100%;
+		padding: 0.75rem;
+		background-color: var(--light-blue);
+		border-radius: 5%;
+		transition: all 200ms;
+	}
+
+	.timeslot-checkbox:checked + label.timeslot-option {
+		scale: 0.9;
+		background-color: blue;
+	}
+
+	.timeslot-checkbox {
+		display: none;
+	}
+
+	h1 {
+		font-size: 2rem;
+	}
+
+	p {
+		font-size: 1.2rem;
+		margin: 0.5rem 0;
+	}
+
+	.warning {
+		color: red;
+	}
+
+	.login {
+		color: red;
+	}
+
+	.divider {
+		width: 100%;
+		height: 4px;
+		background-color: var(--white);
+		margin: 1rem 0;
+		border-radius: 99rem;
+	}
+
+	h2 {
+		font-size: 1.5rem;
+		font-weight: bold;
+		margin-bottom: 1rem;
+	}
+
+	.form-section {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 2rem;
+		overflow: auto;
+	}
+
+	select {
+		font-size: 1.2rem;
+		padding: 0.5rem;
+		border-radius: 0.3rem;
+		border: 1px solid var(--black);
+		background-color: var(--white);
+	}
+
 	table {
 		min-width: 80rem;
 		table-layout: fixed;
 		overflow-x: auto;
+		border-collapse: collapse;
 	}
 
 	.timeslot-option {
@@ -268,5 +342,23 @@
 	td {
 		padding: 0.25rem;
 		text-align: center;
+	}
+
+	input[type='submit'] {
+		display: block;
+		background-color: var(--dark-blue);
+		color: var(--white);
+		border: none;
+		border-radius: 0.3rem;
+		padding: 1rem 1.5rem;
+		font-size: 1.5rem;
+		font-weight: bold;
+		cursor: pointer;
+		transition: background-color 0.2s ease-in-out;
+		margin: auto;
+	}
+
+	input[type='submit']:hover {
+		background-color: var(--light-blue);
 	}
 </style>
