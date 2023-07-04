@@ -79,7 +79,7 @@
 			timeslotAvailable = timeslotAvailable.fill(false);
 			timeslotChecked = timeslotChecked.fill(false);
 			return;
-		} else if (selectedSubject >= subjects.length || selectedLocation >= locations.length) {
+		} else if (selectedSubject > subjects.length || selectedLocation > locations.length) {
 			// uncommon case
 			timeslotAvailable = timeslotAvailable.fill(false);
 			timeslotChecked = timeslotChecked.fill(false);
@@ -92,6 +92,7 @@
 		let validLocationTimeslots = subjectData.timeslots.filter((t: Timeslot) => {
 			return t.locations.includes(selectedLocation);
 		});
+		console.log(validLocationTimeslots);
 
 		timeslotAvailable = timeslotAvailable.fill(false);
 		timeslotInstructors.forEach((s) => s.clear());
