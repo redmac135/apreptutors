@@ -183,7 +183,7 @@ class Lesson(models.Model):
 
     @classmethod
     def create_lesson(
-        cls, timeslot: Timeslot, student: Profile, subject: Qualification
+        cls, timeslot: Timeslot, student: Profile, subject: Qualification, location: Location
     ):
         if not student.is_student:
             raise PermissionError("Not Student")
@@ -191,7 +191,7 @@ class Lesson(models.Model):
         if not subject.check_qualified(instructor):
             raise PermissionError("Not Qualified")
         obj = cls.objects.get_or_create(
-            timeslot=timeslot, student=student, subject=subject
+            timeslot=timeslot, student=student, subject=subject, location=location
         )
         timeslot.set_unavailable()
         return obj
