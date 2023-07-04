@@ -205,3 +205,54 @@
 		</table>
 	</div>
 </form>
+
+<style>
+	table {
+		min-width: 80rem;
+		table-layout: fixed;
+		overflow-x: auto;
+	}
+
+	.timeslot-option {
+		display: block;
+		height: 100%;
+		width: 100%;
+		padding: 0.75rem;
+		background-color: var(--light-blue);
+		border-radius: 5%;
+		transition: all 200ms;
+	}
+
+	.timeslot-checkbox:disabled + label.timeslot-option {
+		background-color: lightcoral;
+	}
+
+	.timeslot-checkbox:checked + label.timeslot-option {
+		scale: 0.9;
+		background-color: blue;
+	}
+
+	.timeslot-checkbox {
+		display: none;
+	}
+
+	tr:first-child {
+		background-color: var(--light-blue);
+	}
+
+	tr:nth-child(even) {
+		background-color: var(--white);
+	}
+
+	th {
+		width: 8.5rem;
+		padding: 0.25rem 1rem;
+		font-weight: bold;
+	}
+
+	td {
+		padding: 0.25rem;
+		text-align: center;
+	}
+
+</style>
