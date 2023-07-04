@@ -1,51 +1,58 @@
-<script lang=ts>
-	import { loading } from "$lib/loading";
-	import LoadingCircle from "$lib/loadingCircle.svelte";
-	import { firebaseUser } from "../store";
+<script lang="ts">
+	import { loading } from '$lib/loading';
+	import LoadingCircle from '$lib/loadingCircle.svelte';
+	import { firebaseUser } from '../store';
 </script>
 
-{#if $loading}
-<div class="loading-wrapper">
-    <LoadingCircle />
-</div>
-{:else}
-    {#if !$firebaseUser.loggedIn}
-    <div class="warning-wrapper">
-        <p class="warning">
-            You are not logged in. Please <a class="login" href="/login?next=become-a-tutor/form"
-                >log in</a
-            > before continuing.
-        </p>
-    </div>
-    {:else}
-    <div class="container">
-        <h1>Find your Tutor at aPrep Tutors</h1>
-        <p>
-            For any special requests or questions: please
-            <a id="email" href="mailto:info@apreptutors.ca" target="_blank" rel="noopener noreferrer">
-                email us
-            </a>
-        </p>
-        <a id="a-button" href="/find-a-tutor/form">Start your Free Trial</a>
-    </div>
-    {/if}
-{/if}
+<main>
+	{#if $loading}
+		<div class="loading-wrapper">
+			<LoadingCircle />
+		</div>
+	{:else if !$firebaseUser.loggedIn}
+		<div class="warning-wrapper">
+			<p class="warning">
+				You are not logged in. Please <a class="login" href="/login?next=become-a-tutor/form"
+					>log in</a
+				> before continuing.
+			</p>
+		</div>
+	{:else}
+		<div class="container">
+			<h1>Find your Tutor at aPrep Tutors</h1>
+			<p>
+				For any special requests or questions: please
+				<a id="email" href="mailto:info@apreptutors.ca" target="_blank" rel="noopener noreferrer">
+					email us
+				</a>
+			</p>
+			<a id="a-button" href="/find-a-tutor/form">Start your Free Trial</a>
+		</div>
+	{/if}
+</main>
 
 <style>
-    .loading-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 80vh;
-    }
+	main {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 70vh;
+	}
 
-    .warning-wrapper {
+	.loading-wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 80vh;
+	}
+
+	.warning-wrapper {
 		background-color: var(--beige);
 		padding: 1.5rem;
 		margin: 2rem;
 		border-radius: 0.3rem;
 		box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-    }
+	}
 
 	.container {
 		display: flex;
