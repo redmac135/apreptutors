@@ -136,7 +136,7 @@ class Timeslot(models.Model):
             valid_timeslots = [timeslot for timeslot in timeslots if timeslot.instructor == instructor]
             final_list.append(valid_timeslots[0])
         
-        return valid_timeslots
+        return final_list
             
 
     def set_unavailable(self):
