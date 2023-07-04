@@ -11,7 +11,7 @@
 
 	const handleTick = () => {
 		const currentDate = new Date();
-		const gap = 1688436000000 - currentDate.getTime(); // Number is epoch time for June 30th 4pm
+		const gap = 1688479200000 - currentDate.getTime(); // Number is epoch time for June 30th 4pm
 
 		const getDays = Math.floor(gap / (1000 * 60 * 60 * 24));
 		const getHours = Math.floor((gap / (1000 * 60 * 60)) % 24);

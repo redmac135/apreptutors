@@ -1,21 +1,58 @@
-<div class="container">
-	<h1>Tutor with aPrep Tutors</h1>
-	<p>
-		Existing tutors: Log in with your designated authorization code to fill in information regarding
-		the subjects and times you're willing to tutor!
-	</p>
+<script lang="ts">
+	import { loading } from "$lib/loading";
+	import LoadingCircle from "$lib/loadingCircle.svelte";
+	import { firebaseUser } from "../store";
+</script>
 
-	<p>
-		Interested tutors: Please
-		<a id="email" href="mailto:info@apreptutors.ca" target="_blank" rel="noopener noreferrer">
-			email us
-		</a>
-		for further inquiries!
-	</p>
-	<a id="a-button" href="/become-a-tutor/form">Get started</a>
+{#if $loading}
+<div class="loading-wrapper">
+	<LoadingCircle />
 </div>
+{:else}
+	{#if !$firebaseUser.loggedIn}
+		<div class="warning-wrapper">
+			<p class="warning">
+				You are not logged in. Please <a class="login" href="/login?next=become-a-tutor/form"
+					>log in</a
+				> before continuing.
+			</p>
+		</div>
+	{:else}
+		<div class="container">
+			<h1>Tutor with aPrep Tutors</h1>
+			<p>
+				Existing tutors: Log in with your designated authorization code to fill in information regarding
+				the subjects and times you're willing to tutor!
+			</p>
+
+			<p>
+				Interested tutors: Please
+				<a id="email" href="mailto:info@apreptutors.ca" target="_blank" rel="noopener noreferrer">
+					email us
+				</a>
+				for further inquiries!
+			</p>
+			<a id="a-button" href="/become-a-tutor/form">Get started</a>
+		</div>
+	{/if}
+{/if}
 
 <style>
+	.loading-wrapper {
+		display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+	}
+
+	.warning-wrapper {
+		background-color: var(--beige);
+		padding: 1.5rem;
+		margin: 2rem;
+		border-radius: 0.3rem;
+		box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    }
+
 	.container {
 		display: flex;
 		flex-direction: column;

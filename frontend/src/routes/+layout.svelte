@@ -5,6 +5,10 @@
 
 	// should this be before or after the components
 	import '../app.css';
+
+	import { loading } from "$lib/loading";
+	import { navigating } from '$app/stores';
+	$: $loading = !!$navigating;
 </script>
 
 <svelte:head>
