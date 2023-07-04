@@ -17,6 +17,13 @@
 		'9:00 PM - 10:30 PM'
 	];
 
+	function hasCommonElement(s1: Set<number>, s2: Set<number>): boolean {
+		for (let e of s1) {
+			if (s2.has(e)) return true;
+		}
+		return false;
+	}
+
 	function getTimeslotIndex(day: string, timeslot: string) {
 		let d = {
 			MON: 0,
@@ -42,20 +49,36 @@
 		if (d === undefined || t === undefined) {
 			return -1;
 		}
-		return d * timeslots.length + t;
+		return t * days.length + d;
 	}
 
+	const MAX_SELECTION = 2;
 	let selectedSubject = -1;
 	let selectedLocation = -1;
+	// TODO: uncheck all timeslots when subject/location changes
 
 	let timeslotAvailable = Array<boolean>(days.length * timeslots.length).fill(false);
-	function updateTimeslots() {
+	let checked = new Set<number>();
+	let timeslotChecked = Array<boolean>(days.length * timeslots.length).fill(false);
+	let timeslotInstructors = Array<Set<number>>(days.length * timeslots.length);
+	for (let i = 0; i < timeslotInstructors.length; i++) {
+		// .fill is shallow copy
+		timeslotInstructors[i] = new Set<number>();
+	}
+
+	// note:
+	// must use arr = arr.fill(val)
+	// instead of arr.fill(val)
+	// because svelte detects changes from assignment
+	function updateBySubject() {
 		if (selectedSubject === -1 || selectedLocation === -1) {
-			timeslotAvailable.fill(false);
+			timeslotAvailable = timeslotAvailable.fill(false);
+			timeslotChecked = timeslotChecked.fill(false);
 			return;
 		} else if (selectedSubject >= subjects.length || selectedLocation >= locations.length) {
 			// uncommon case
-			timeslotAvailable.fill(false);
+			timeslotAvailable = timeslotAvailable.fill(false);
+			timeslotChecked = timeslotChecked.fill(false);
 			return;
 		}
 
@@ -66,15 +89,53 @@
 			return t.locations.includes(selectedLocation);
 		});
 
-		console.log(validLocationTimeslots)
-
-		timeslotAvailable.fill(false);
+		timeslotAvailable = timeslotAvailable.fill(false);
+		timeslotInstructors.forEach((s) => s.clear());
+		checked.clear();
+		timeslotChecked = timeslotChecked.fill(false);
 		for (let t of validLocationTimeslots) {
 			let index = getTimeslotIndex(t.weekday, t.start_time);
-			if (index !== -1) {
-				timeslotAvailable[index] = true;
+			if (index === -1) continue;
+			timeslotAvailable[index] = true;
+			timeslotInstructors[index].add(t.instructor.pk);
+		}
+	}
+
+	function updateFromSelectedInstructors() {
+		let instructorsUnion = new Set<number>();
+		for (let i of checked) {
+			for (let j of timeslotInstructors[i]) {
+				instructorsUnion.add(j);
 			}
 		}
+		timeslotAvailable.forEach((avail, i) => {
+			if (timeslotInstructors[i].size === 0) return;
+			timeslotAvailable[i] = hasCommonElement(timeslotInstructors[i], instructorsUnion);
+		});
+	}
+	function updateByInstructor(e: Event) {
+		let target = e.target as HTMLInputElement;
+		let index = parseInt(target.id.split('-')[1]);
+		if (target.checked) {
+			// add associated instructors to selectedInstructors
+			// then update timeslotAvailable
+			checked.add(index);
+			if (checked.size >= MAX_SELECTION) {
+				timeslotAvailable.forEach((v, i) => {
+					timeslotAvailable[i] = checked.has(i);
+				});
+				return;
+			}
+		} else {
+			// remove associated instructors from selectedInstructors
+			// then update timeslotAvailable
+			checked.delete(index);
+			if (checked.size === 0) {
+				updateBySubject();
+				return;
+			}
+		}
+		updateFromSelectedInstructors();
 	}
 </script>
 
@@ -84,10 +145,10 @@
 
 	<div class="form-section">
 		<h2>subject</h2>
-		<select name="subjects" id="subjects" bind:value={selectedSubject} on:change={updateTimeslots}>
+		<select name="subjects" id="subjects" bind:value={selectedSubject} on:change={updateBySubject}>
 			<option value={-1}>Select a subject</option>
 			{#each subjects as { pk, name, type }}
-				<option value={pk}>{`${name} ${type}`}</option>
+				<option value={pk}>{`${pk} ${type}`}</option>
 			{/each}
 		</select>
 	</div>
@@ -100,11 +161,11 @@
 			name="locations"
 			id="locations"
 			bind:value={selectedLocation}
-			on:change={updateTimeslots}
+			on:change={updateBySubject}
 		>
 			<option value={-1}>Select a location</option>
 			{#each locations as { pk, name, address }}
-				<option value={pk}>{name}</option>
+				<option value={pk}>{pk}</option>
 			{/each}
 		</select>
 	</div>
@@ -113,7 +174,7 @@
 
 	<div class="form-section">
 		<h2>pick a time</h2>
-		<p>select 2 time</p>
+		<p>select {MAX_SELECTION} time</p>
 		<table id="time-selection">
 			<tr>
 				<th />
@@ -121,20 +182,22 @@
 					<th>{day}</th>
 				{/each}
 			</tr>
-			{#each timeslots as tslot, i}
+			{#each timeslots as tslot, t}
 				<tr>
 					<th>{tslot}</th>
-					{#each days as day, j}
+					{#each days as day, d}
 						<td>
 							<input
-								disabled={!timeslotAvailable[i * days.length + j]}
+								disabled={!timeslotAvailable[t * days.length + d]}
 								type="checkbox"
 								name="timeslot"
 								class="timeslot-checkbox"
-								value={`${day}-${i}`}
-								id={`${day}-${i}`}
+								value={`${day}-${t}`}
+								id={`timeslot-${t * days.length + d}`}
+								on:change={updateByInstructor}
+								bind:checked={timeslotChecked[t * days.length + d]}
 							/>
-							<label for={`${day}-${i}`} class="timeslot-option" />
+							<label for={`timeslot-${t * days.length + d}`} class="timeslot-option" />
 						</td>
 					{/each}
 				</tr>
