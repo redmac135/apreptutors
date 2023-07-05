@@ -32,7 +32,7 @@
 			<h2>About</h2>
 			<ul>
 				<li><a href="/#aboutus">About us</a></li>
-				<li><a href="/comingsoon">Our tutors</a></li>
+				<li><a href="/our-story">Our tutors</a></li>
 				<li><a href="/#pricing">Pricing</a></li>
 			</ul>
 		</div>
