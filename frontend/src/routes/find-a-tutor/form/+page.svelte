@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { SubjectTimeslot, Timeslot } from '$lib/types';
+	import { loginWithGoogle } from '$lib/auth';
 	import { firebaseUser } from '../../store';
 	import { apiUrl } from '$lib/api';
 	import { goto } from '$app/navigation';
@@ -198,6 +199,8 @@
 				if (res.status === 200) {
 					// TODO: change this redirect to /home
 					goto('/find-a-tutor/success');
+				} else if (res.status === 401) {
+					loginWithGoogle();
 				} else {
 					alert('Something went wrong. Please try again.');
 				}
