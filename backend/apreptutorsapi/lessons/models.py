@@ -173,6 +173,7 @@ class CanTeachAt(models.Model):
 
 
 class Lesson(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
     timeslot = models.ForeignKey(Timeslot, null=True, on_delete=models.SET_NULL)
     student = models.ForeignKey(Profile, null=True, on_delete=models.SET_NULL)
     location = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
