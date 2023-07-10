@@ -8,6 +8,10 @@ from auth_firebase.authentication import FirebaseAuthentication
 import json
 import hashlib
 
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 # Create your views here.
 class InstructorAPI(APIView):
@@ -241,5 +245,24 @@ class CreateLessonAPI(APIView):
                 subject=subject,
                 num_students=int(data["num_students"]),
             )
+
+        # Send Verification Email
+        instructor = timeslots[0].instructor
+        email_data = {
+            "student": user.display_name,
+            "instructor": instructor.display_name,
+            "subject": str(subject),
+            "times": [str(timeslot.start_time) for timeslot in timeslots],
+            "num_students": int(data["num_students"]),
+        }
+        message = render_to_string("lessons/lessonconfirmation.html", email_data)
+        subject = "aPrep Tutors new Lesson Notification"
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=None, # None will use default
+            recipient_list=[settings.EMAIL_HOST_USER, instructor.email],
+            fail_silently=False,
+        )
 
         return Response(status=status.HTTP_200_OK)

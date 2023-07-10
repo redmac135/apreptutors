@@ -88,7 +88,7 @@
 			.then((res) => {
 				if (res.status === 200) {
 					// TODO: change this redirect to /home
-					goto('/comingsoon');
+					goto('/');
 				} else {
 					alert('Something went wrong. Please try again.');
 				}
