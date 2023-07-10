@@ -36,7 +36,6 @@
 	};
 
 	function handleSubmit(e: any) {
-		console.log('UISHFDIUSDHFUSHDOUGHOFU');
 		const ACTION_URL = e.target.action;
 		const FORM_DATA = new FormData(e.target);
 		let data: FormData = {
@@ -139,7 +138,13 @@
 						<input type="checkbox" name="location" value={pk.toString()} id={`location${pk}`} />
 						<label for={`location${pk}`}>
 							{name}
-							<a class="maps-link" href={address} title={`View ${name} on Google Maps`}>
+							<a
+								class="maps-link"
+								href={address}
+								title={`View ${name} on Google Maps`}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
 								<svg
 									class="link-icon"
 									xmlns="http://www.w3.org/2000/svg"

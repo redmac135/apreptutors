@@ -13,7 +13,6 @@ class ProfileManager(models.Manager):
             uid=uid,
             display_name=display_name,
             email=email,
-            is_student=False,
             is_teacher=False,
         )
     
@@ -40,7 +39,6 @@ class ProfileManager(models.Manager):
             uid=uid,
             display_name=display_name,
             email=email,
-            is_student=True,
             is_teacher=False,
         )
 

@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { loading } from "$lib/loading";
-	import LoadingCircle from "$lib/loadingCircle.svelte";
-	import { firebaseUser } from "../store";
+	import { loading } from '$lib/loading';
+	import LoadingCircle from '$lib/loadingCircle.svelte';
+	import { firebaseUser } from '../store';
 </script>
 
-{#if $loading}
-<div class="loading-wrapper">
-	<LoadingCircle />
-</div>
-{:else}
-	{#if !$firebaseUser.loggedIn}
+<main>
+	{#if $loading}
+		<div class="loading-wrapper">
+			<LoadingCircle />
+		</div>
+	{:else if !$firebaseUser.loggedIn}
 		<div class="warning-wrapper">
 			<p class="warning">
 				You are not logged in. Please <a class="login" href="/login?next=become-a-tutor/form"
@@ -19,30 +19,31 @@
 		</div>
 	{:else}
 		<div class="container">
-			<h1>Tutor with aPrep Tutors</h1>
+			<h1>Find your Tutor at aPrep Tutors</h1>
 			<p>
-				Existing tutors: Log in with your designated authorization code to fill in information regarding
-				the subjects and times you're willing to tutor!
-			</p>
-
-			<p>
-				Interested tutors: Please
+				For any special requests or questions: please
 				<a id="email" href="mailto:info@apreptutors.ca" target="_blank" rel="noopener noreferrer">
 					email us
 				</a>
-				for further inquiries!
 			</p>
-			<a id="a-button" href="/become-a-tutor/form">Get started</a>
+			<a id="a-button" href="/find-a-tutor/form">Start your Free Trial</a>
 		</div>
 	{/if}
-{/if}
+</main>
 
 <style>
+	main {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 70vh;
+	}
+
 	.loading-wrapper {
 		display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 80vh;
+		align-items: center;
+		justify-content: center;
+		height: 80vh;
 	}
 
 	.warning-wrapper {
@@ -51,7 +52,7 @@
 		margin: 2rem;
 		border-radius: 0.3rem;
 		box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-    }
+	}
 
 	.container {
 		display: flex;

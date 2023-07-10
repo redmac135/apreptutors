@@ -43,7 +43,7 @@ class LocationsListAPI(APIView):
 class UserTypeAPI(APIView):
     model_class = Profile
 
-    permission_classes = [FirebaseAuthentication]
+    authentication_classes = [FirebaseAuthentication]
 
     def get(self, request):
         user = self.authentication_classes[0].authenticate(
@@ -91,10 +91,16 @@ class TimeslotsListAPI(APIView):
                 instructor__instructorqualification_set__qualification=subject,
                 is_available=True,
             )
+            data = self.serializer_class(valid_timeslots, many=True).data
+            location_ids = set()
+            for timeslot in data:
+                for location in timeslot["instructor"].pop("canteachat_set"):
+                    location_ids.add(location["location"]["pk"])
+                timeslot["locations"] = list(location_ids)
             response.append(
                 {
                     "subjectId": subject.pk,
-                    "timeslots": self.serializer_class(valid_timeslots, many=True),
+                    "timeslots": data,
                 }
             )
         return Response(response, status=status.HTTP_200_OK)
@@ -122,6 +128,7 @@ class InstructorSignupAPI(APIView):
             )
 
         user.set_teacher(True)
+        user.save()
 
         # Create Instructor Qualifications
         for subject_pk in data["subjects"]:
@@ -181,18 +188,29 @@ class RegisteredLessonsAPI(APIView):
     serializer_class = LessonSerializer
     authentication_classes = [FirebaseAuthentication]
 
-    def get(self, request):
+    # type: "student" | "teacher"
+    def get(self, request, type: str):
         user: Profile = self.authentication_classes[0].authenticate(
             FirebaseAuthentication(), request
         )[0]
-        lessons = self.model_class.objects.filter(student__uid=user.uid)
+
+        if type == "student":
+            lessons = self.model_class.objects.filter(student__uid=user.uid)
+        elif type == "teacher":
+            lessons = self.model_class.objects.filter(
+                timeslot__instructor__uid=user.uid
+            )
+        else:
+            raise TypeError("type may only be 'student' or 'teacher'.")
+
         serializer = self.serializer_class(lessons, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class RegisterLessonAPI(APIView):
+class CreateLessonAPI(APIView):
     model_class = Lesson
     authentication_classes = [FirebaseAuthentication]
+    ALLOWED_LESSONS_PER_WEEK = [1, 2]
 
     def post(self, request):
         data = json.loads(request.body)
@@ -200,14 +218,28 @@ class RegisterLessonAPI(APIView):
             FirebaseAuthentication(), request
         )[0]
 
-        if not len(data["timeslots"]) == 2:
-            raise ValueError("Only 2 Timeslots Allowed")
-        for timeslot in data["timeslots"]:
+        lesson_amount = 0
+        for value in data["timeslots"].values():
+            lesson_amount += len(value)
+
+        if not lesson_amount in self.ALLOWED_LESSONS_PER_WEEK:
+            raise ValueError("Wrong number of lessons")
+        location = Location.objects.get(pk=data["location"])
+        subject = Qualification.objects.get(pk=data["subject"])
+        timeslot_criteria = []
+        for weekday_long, time_pk_list in data["timeslots"].items():
+            for time_pk in time_pk_list:
+                timeslot_criteria.append(
+                    (weekday_long[0:3].upper(), Timeslot.ALLOWED_TIMES[time_pk][0])
+                )
+        timeslots = Timeslot.find_timeslots(timeslot_criteria, subject, location)
+        for timeslot in timeslots:
             self.model_class.create_lesson(
-                timeslot=Timeslot.objects.get(pk=timeslot),
+                timeslot=timeslot,
                 student=user,
-                location=Location.objects.get(pk=data["location"]),
-                subject=Qualification.objects.get(pk=data["subject"]),
+                location=location,
+                subject=subject,
+                num_students=int(data["num_students"]),
             )
 
         return Response(status=status.HTTP_200_OK)

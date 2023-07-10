@@ -106,6 +106,39 @@ class Timeslot(models.Model):
             )
             return obj
 
+    # Pass in a list of criteria and this method will return a list of timeslots which fits the criteria
+    @classmethod
+    def find_timeslots(cls, timeslot_criteria, subject, location):
+        possible_instructors = []
+        possible_timeslots = []
+        for weekday, start_time in timeslot_criteria:
+            timeslots = cls.objects.filter(
+                weekday=weekday,
+                start_time=start_time,
+                instructor__instructorqualification_set__qualification=subject,
+                instructor__canteachat_set__location=location,
+            )
+            instructors = [timeslot.instructor for timeslot in timeslots]
+            possible_timeslots.append(timeslots)
+            possible_instructors.append(instructors)
+        
+        reduced_instructors = set(possible_instructors[0])
+        for s in possible_instructors[1:]:
+            reduced_instructors.intersection_update(s)
+        
+        if not reduced_instructors:
+            raise LookupError("No Valid Timeslots")
+    
+        # Pick first instructor
+        instructor = next(iter(reduced_instructors))
+        final_list = []
+        for timeslots in possible_timeslots:
+            valid_timeslots = [timeslot for timeslot in timeslots if timeslot.instructor == instructor]
+            final_list.append(valid_timeslots[0])
+        
+        return final_list
+            
+
     def set_unavailable(self):
         self.is_available = False
         self.save()
@@ -144,13 +177,14 @@ class Lesson(models.Model):
     student = models.ForeignKey(Profile, null=True, on_delete=models.SET_NULL)
     location = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
     subject = models.ForeignKey(Qualification, null=True, on_delete=models.SET_NULL)
+    num_students = models.IntegerField(default=1)
 
     def __str__(self) -> str:
         return str(self.subject) + " " + str(self.timeslot) + " " + str(self.student)
 
     @classmethod
     def create_lesson(
-        cls, timeslot: Timeslot, student: Profile, subject: Qualification
+        cls, timeslot: Timeslot, student: Profile, subject: Qualification, location: Location, num_students: int
     ):
         if not student.is_student:
             raise PermissionError("Not Student")
@@ -158,7 +192,7 @@ class Lesson(models.Model):
         if not subject.check_qualified(instructor):
             raise PermissionError("Not Qualified")
         obj = cls.objects.get_or_create(
-            timeslot=timeslot, student=student, subject=subject
+            timeslot=timeslot, student=student, subject=subject, location=location, num_students=num_students
         )
         timeslot.set_unavailable()
         return obj

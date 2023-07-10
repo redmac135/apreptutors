@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { firebaseUser } from '../routes/store';
+
 	let open = false;
 	function toggle() {
 		open = !open;
@@ -13,21 +15,31 @@
 		<li>
 			<a on:click={close} class="logo" href="/#">aPrep Tutors</a>
 		</li>
-		<button class="burger" on:click={toggle} class:open>
-			<div />
-			<div />
-			<div />
-		</button>
+		<div class="burger-wrapper">
+			<button class="burger" on:click={toggle} class:open>
+				<div />
+				<div />
+				<div />
+			</button>
+			{#if $firebaseUser.photoUrl}
+				<img class="mobile-profile-pic" src={$firebaseUser.photoUrl} alt="user profile" />
+			{/if}
+		</div>
 	</ul>
 	<ul class="nav-right" class:nav-open={open}>
 		<li class="link"><a on:click={close} href="/#aboutus">About us</a></li>
 		<li class="link"><a on:click={close} href="/#pricing">Pricing</a></li>
 		<li class="link"><a on:click={close} href="/become-a-tutor">Become a Tutor</a></li>
-		<div class="divider-vertical" />
-		<li class="link"><a on:click={close} href="/login">Log In</a></li>
+		{#if !$firebaseUser.loggedIn}
+			<div class="divider-vertical" />
+			<li class="link"><a on:click={close} href="/login">Log In</a></li>
+		{/if}
 		<!-- <li class="link"><a on:click={close} href="/comingsoon">中文</a></li> -->
 		<!-- todo: change href to find-a-tutor -->
-		<li><a on:click={close} href="/comingsoon"><button class="button">Find a Tutor</button></a></li>
+		<li><a on:click={close} href="/find-a-tutor"><button class="button">Find a Tutor</button></a></li>
+		{#if $firebaseUser.photoUrl}
+			<img class="profile-pic" src={$firebaseUser.photoUrl} alt="user profile" />
+		{/if}
 	</ul>
 </nav>
 
@@ -146,7 +158,37 @@
 		border-color: var(--dark-blue);
 	}
 
-	@media (min-width: 600px) {
+	.profile-pic {
+		display: none;
+		width: 2rem;
+		height: 2rem;
+		border-radius: 50%;
+		margin-left: 1rem;
+	}
+
+	.mobile-profile-pic {
+		display: inline;
+		width: 2rem;
+		height: 2rem;
+		border-radius: 50%;
+		margin-left: 1rem;
+	}
+
+	.burger-wrapper {
+		display: flex;
+		align-items: center;
+		margin-right: 0.5rem;
+	}
+
+	@media (min-width: 700px) {
+		.profile-pic {
+			display: inline;
+		}
+
+		.mobile-profile-pic {
+			display: none;
+		}
+
 		nav {
 			display: flex;
 		}
@@ -192,6 +234,10 @@
 		.button {
 			padding: 0.5rem 1rem;
 			font-size: medium;
+		}
+
+		.profile-pic {
+			display: block;
 		}
 	}
 </style>
