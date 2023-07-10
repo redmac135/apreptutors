@@ -75,7 +75,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "lessons",
-    "auth_firebase.apps.AuthFirebaseConfig",
+    "auth_firebase",
     "rest_framework",
 ]
 
