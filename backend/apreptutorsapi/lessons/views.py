@@ -12,6 +12,9 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.conf import settings
 
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
 
 # Create your views here.
 class InstructorAPI(APIView):
@@ -255,14 +258,19 @@ class CreateLessonAPI(APIView):
             "times": [str(timeslot.start_time) for timeslot in timeslots],
             "num_students": int(data["num_students"]),
         }
-        message = render_to_string("lessons/lessonconfirmation.html", email_data)
+        message_html = render_to_string("lessons/lessonconfirmation.html", email_data)
         subject = "aPrep Tutors new Lesson Notification"
-        send_mail(
-            subject=subject,
-            message=message,
-            from_email=None, # None will use default
-            recipient_list=[settings.EMAIL_HOST_USER, instructor.email],
-            fail_silently=False,
-        )
+
+        message = Mail(from_email=settings.DEFAULT_FROM_EMAIL, to_emails=[settings.DEFAULT_FROM_EMAIL, instructor.email], subject=subject, html_content=message_html)
+
+        try:
+            sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
+            response = sg.send(message)
+            print("-----SENDING EMAIL-----")
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+        except Exception as e:
+            print(str(e))
 
         return Response(status=status.HTTP_200_OK)
