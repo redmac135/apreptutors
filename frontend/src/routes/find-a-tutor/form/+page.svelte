@@ -216,7 +216,7 @@
 	<h1>Find a Tutor</h1>
 	{#if !$firebaseUser.loggedIn}
 		<p class="warning">
-			You are not logged in. Please <a class="login" href="/login?next=become-a-tutor/form"
+			You are not logged in. Please <a class="login" href="/login?next=find-a-tutor/form"
 				>log in</a
 			> before continuing.
 		</p>
