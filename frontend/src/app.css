@@ -9,12 +9,14 @@
 @font-face {
     font-family: workSans;
     src: url('/fonts/WorkSans-VariableFont_wght.ttf');
+    font-display: swap;
 }
 
 @font-face {
     font-family: workSans;
     src: url('/fonts/WorkSans-Italic-VariableFont_wght.ttf');
     font-style: italic;
+    font-display: swap;
 }
 
 * {
