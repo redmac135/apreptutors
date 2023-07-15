@@ -43,7 +43,7 @@
 
 <style>
 	section {
-		background-image: url('/images/sloganbackground.jpg');
+		background-image: url('/images/sloganbackground.webp');
 		background-position: center;
 		background-size: cover;
 		background-attachment: fixed;
