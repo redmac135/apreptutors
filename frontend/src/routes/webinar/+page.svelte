@@ -5,6 +5,14 @@
 	<p class="description">
 		Join us for a discussion of the following topics, from recent graduates of the IB Programme.
 	</p>
+	<a
+		class="register"
+		href="https://westernuniversity.zoom.us/j/92168956716"
+		target="_blank"
+		rel="noopener noreferrer"
+	>
+		Zoom Meeting Link &rarr;
+	</a>
 	<div class="topic">
 		<div class="topic-text">
 			<h2>Getting into the <span class="highlight">IB Programme.</span></h2>
@@ -14,21 +22,13 @@
 		</div>
 	</div>
 	<div class="topic reverse">
-        <div class="topic-text">
+		<div class="topic-text">
 			<h2>Applying to <span class="highlight">university</span> from IB.</h2>
 		</div>
 		<div class="promo">
 			<img src="/images/webinar/promo2.png" alt="webinar promotion" />
 		</div>
 	</div>
-	<a
-		class="register"
-		href="https://forms.gle/R9sYYfSaEBiAZtnp8"
-		target="_blank"
-		rel="noopener noreferrer"
-	>
-		Register for The IB Pespective &rarr;
-	</a>
 </div>
 
 <style>
@@ -70,12 +70,11 @@
 		border-radius: 0.5rem;
 		color: var(--white);
 		font-weight: 500;
-        margin: 1rem 0;
+		margin: 1rem 0;
 	}
 
 	.description {
 		font-size: 1.25rem;
-        margin-bottom: 3rem;
 	}
 
 	.topic {
@@ -118,7 +117,7 @@
 		border-radius: 1rem;
 		border: 2px solid var(--dark-blue);
 		transition: all 0.4s ease-in-out;
-        margin-top: 2rem;
+		margin: 3rem 0;
 	}
 
 	.register:hover {
@@ -126,37 +125,37 @@
 		color: var(--dark-blue);
 	}
 
-    @media (min-width: 800px) {
-        .container {
-            margin: 2rem 0;
-        }
+	@media (min-width: 800px) {
+		.container {
+			margin: 2rem 0;
+		}
 
-        .title {
-            font-size: 3rem;
-        }
+		.title {
+			font-size: 3rem;
+		}
 
-        .topic {
-            flex-direction: row;
-        }
+		.topic {
+			flex-direction: row;
+		}
 
-        .topic-text {
-            width: 50%;
-        }
+		.topic-text {
+			width: 50%;
+		}
 
-        h2 {
-            font-size: 2.5rem;
-        }
+		h2 {
+			font-size: 2.5rem;
+		}
 
-        .promo {
-            width: 50%;
-        }
+		.promo {
+			width: 50%;
+		}
 
-        .reverse {
-            flex-direction: row-reverse;
-        }
+		.reverse {
+			flex-direction: row-reverse;
+		}
 
-        .register {
-            font-size: 1.25rem;
-        }
-    }
+		.register {
+			font-size: 1.25rem;
+		}
+	}
 </style>
